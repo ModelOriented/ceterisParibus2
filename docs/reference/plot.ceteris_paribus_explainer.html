@@ -181,10 +181,6 @@ Various parameters help to decide what should be plotted, profiles, aggregated p
       <td><p>function. If NULL (default) then individual profiles will be plotted. If a function (e.g. mean or median) then profiles will be aggregated and only the aggregate profile will be plotted</p></td>
     </tr>
     <tr>
-      <th>as.gg</th>
-      <td><p>if TRUE then returning plot will have gg class</p></td>
-    </tr>
-    <tr>
       <th>facet_ncol</th>
       <td><p>number of columns for the `facet_wrap()`</p></td>
     </tr>
@@ -215,16 +211,16 @@ Various parameters help to decide what should be plotted, profiles, aggregated p
 <span class='no'>apartments_small_2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='select_sample.html'>select_sample</a></span>(<span class='no'>apartmentsTest</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>)
 <span class='no'>apartments_small_3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='select_neighbours.html'>select_neighbours</a></span>(<span class='no'>apartmentsTest</span>, <span class='no'>apartments_small_1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>)
 
-<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small</span>)
-<span class='no'>cp_rf_1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_1</span>)
-<span class='no'>cp_rf_2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_2</span>)
-<span class='no'>cp_rf_3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_3</span>)
+<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small</span>)
+<span class='no'>cp_rf_1</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_1</span>)
+<span class='no'>cp_rf_2</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_2</span>)
+<span class='no'>cp_rf_3</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_3</span>)
 <span class='no'>cp_rf</span>
 
-<span class='no'>cp_rf_y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small</span>$<span class='no'>m2.price</span>)
-<span class='no'>cp_rf_y1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small_1</span>$<span class='no'>m2.price</span>)
-<span class='no'>cp_rf_y2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_2</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small_2</span>$<span class='no'>m2.price</span>)
-<span class='no'>cp_rf_y3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_3</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small_3</span>$<span class='no'>m2.price</span>)
+<span class='no'>cp_rf_y</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small</span>$<span class='no'>m2.price</span>)
+<span class='no'>cp_rf_y1</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small_1</span>$<span class='no'>m2.price</span>)
+<span class='no'>cp_rf_y2</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_2</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small_2</span>$<span class='no'>m2.price</span>)
+<span class='no'>cp_rf_y3</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_3</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small_3</span>$<span class='no'>m2.price</span>)
 
 <span class='fu'>plot</span>(<span class='no'>cp_rf_y</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
@@ -246,10 +242,6 @@ Various parameters help to decide what should be plotted, profiles, aggregated p
 
 <span class='fu'>plot</span>(<span class='no'>cp_rf_y3</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>color_residuals</span> <span class='kw'>=</span> <span class='st'>"orange"</span>, <span class='kw'>size_rugs</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)
-
-<span class='fu'>plot</span>(<span class='no'>cp_rf_y</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>size_rugs</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-               <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"surface"</span>, <span class='kw'>as.gg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) +
-               <span class='fu'>scale_color_gradient</span>(<span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"darkblue"</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>)
 
 <span class='fu'>plot</span>(<span class='no'>cp_rf_y1</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"surface"</span>, <span class='kw'>size_points</span> <span class='kw'>=</span> <span class='fl'>3</span>)
