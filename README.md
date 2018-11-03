@@ -1,6 +1,6 @@
-[![Build Status](https://api.travis-ci.org/pbiecek/ceterisParibus2.png)](https://travis-ci.org/pbiecek/ceterisParibus2)
+[![Build Status](https://api.travis-ci.org/drwhy2/ceterisParibus2.png)](https://travis-ci.org/drwhy2/ceterisParibus2)
 [![Coverage
-Status](https://img.shields.io/codecov/c/github/pbiecek/ceterisParibus2/master.svg)](https://codecov.io/github/pbiecek/ceterisParibus2?branch=master)
+Status](https://img.shields.io/codecov/c/github/drwhy2/ceterisParibus2/master.svg)](https://codecov.io/github/drwhy2/ceterisParibus2?branch=master)
 
 # Ceteris Pabibus: Model Agnostic Explorartion for Individual Predictions
 
@@ -9,14 +9,14 @@ Expect rapid changes.
 
 The `ceterisParibus2` package is a model agnostic tool for profiling of predictions from black boxes.
 
-It's a part of [DrWhy](https://github.com/pbiecek/DrWhy) collection of tools.
+It's a part of [DrWhy](https://github.com/DrWhy2/DrWhy) collection of tools.
 
-Find lots of R examples at `ceterisParibus2` website: https://pbiecek.github.io/ceterisParibus2/
+Find lots of R examples at `ceterisParibus2` website: https://drwhy2.github.io/ceterisParibus2/
 
 ## Installation
 
 Install from GitHub
 
 ```
-devtools::install_github("pbiecek/ceterisParibus2")
+devtools::install_github("drwhy2/ceterisParibus2")
 ```
