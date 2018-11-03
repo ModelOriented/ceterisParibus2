@@ -4,7 +4,6 @@
 \alias{local_profile}
 \alias{local_profile.explainer}
 \alias{local_profile.default}
-\alias{ceteris_paribus}
 \title{Local Profiles via Ceteris Paribus Explainer}
 \usage{
 local_profile(x, ...)
@@ -12,25 +11,34 @@ local_profile(x, ...)
 \method{local_profile}{explainer}(x, new_observation, variables = NULL,
   variable_splits = NULL, grid_points = 101, ...)
 
-\method{local_profile}{default}(x, data, y = NULL,
-  predict_function = predict, new_observation, variables = NULL,
-  variable_splits = NULL, grid_points = 101, label = class(x)[1], ...)
-
-ceteris_paribus(explainer, observations, y = NULL, variable_splits = NULL,
-  variables = NULL, grid_points = 101)
+\method{local_profile}{default}(x, data, predict_function = predict,
+  new_observation, variables = NULL, variable_splits = NULL,
+  grid_points = 101, label = class(x)[1], ...)
 }
 \arguments{
+\item{x}{a model to be explained, or an explainer created with function `DALEX::explain()`.}
+
+\item{...}{other parameters}
+
+\item{new_observation}{a new observation with columns that corresponds to variables used in the model}
+
 \item{variables}{names of variables for which profiles shall be calculated. Will be passed to `calculate_variable_splits()`. If NULL then all variables from the validation data will be used.}
 
 \item{variable_splits}{named list of splits for variables, in most cases created with `calculate_variable_splits()`. If NULL then it will be calculated based on validation data avaliable in the `explainer`.}
 
 \item{grid_points}{number of points for profile. Will be passed to `calculate_variable_splits()`.}
 
-\item{y}{true labels for `observations`. If specified then will be added to ceteris paribus plots.}
+\item{data}{validation dataset, will be extracted from `x` if it's an explainer}
+
+\item{predict_function}{predict function, will be extracted from `x` if it's an explainer}
+
+\item{label}{name of the model. By default it's extracted from the 'class' attribute of the model}
 
 \item{explainer}{a model to be explained, preprocessed by function `DALEX::explain()`.}
 
 \item{observations}{set of observarvation for which profiles are to be calculated}
+
+\item{y}{true labels for `observations`. If specified then will be added to ceteris paribus plots.}
 }
 \value{
 An object of the class 'ceteris_paribus_explainer'.
@@ -40,23 +48,40 @@ It's a data frame with calculated average responses.
 This function calculate Ceteris Paribus profiles for selected data points.
 }
 \examples{
-library("DALEX")
+library("DALEX2")
+library("ceterisParibus2")
  \dontrun{
 library("randomForest")
 set.seed(59)
 
-apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
-      no.rooms + district, data = apartments)
+apartments_rf <- randomForest(m2.price ~ construction.year + surface + floor +
+                                no.rooms + district, data = apartments)
 
-explainer_rf <- explain(apartments_rf_model,
-      data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+explainer_rf <- explain(apartments_rf,
+                        data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 
-apartments_small <- select_sample(apartmentsTest, 10)
+my_apartment <- apartmentsTest[1, ]
 
-cp_rf <- ceteris_paribus(explainer_rf, apartments_small)
-cp_rf
+lp_rf <- local_profile(explainer_rf, my_apartment)
+lp_rf
 
-cp_rf <- ceteris_paribus(explainer_rf, apartments_small, y = apartments_small$m2.price)
-cp_rf
+plot(lp_rf)
+
+# --------
+# multiclass
+
+HR_rf <- randomForest(status ~ . , data = HR)
+explainer_rf <- explain(HR_rf,
+                        data = HRTest,
+                        y = HRTest)
+
+my_HR <- HRTest[1, ]
+
+lp_rf <- local_profile(explainer_rf,
+                       my_HR)
+lp_rf
+
+plot(lp_rf, color = "_label_")
+
 }
 }

@@ -54,8 +54,6 @@
 
 \item{aggregate_profiles}{function. If NULL (default) then individual profiles will be plotted. If a function (e.g. mean or median) then profiles will be aggregated and only the aggregate profile will be plotted}
 
-\item{as.gg}{if TRUE then returning plot will have gg class}
-
 \item{facet_ncol}{number of columns for the `facet_wrap()`}
 
 \item{selected_variables}{if not NULL then only `selected_variables` will be presented}
@@ -115,10 +113,6 @@ plot(cp_rf_y2, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
 
 plot(cp_rf_y3, show_profiles = TRUE, show_rugs = TRUE,
                show_residuals = TRUE, alpha = 0.2, color_residuals = "orange", size_rugs = 0.5)
-
-plot(cp_rf_y, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE, size_rugs = 0.5,
-               show_residuals = TRUE, alpha = 0.5, color = "surface", as.gg = TRUE) +
-               scale_color_gradient(low = "darkblue", high = "darkred")
 
 plot(cp_rf_y1, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
                show_residuals = TRUE, alpha = 0.5, color = "surface", size_points = 3)

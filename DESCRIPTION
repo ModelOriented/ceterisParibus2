@@ -15,7 +15,7 @@ Suggests: randomForest,
     e1071,
     testthat,
     rpart
-Imports: DALEX,
+Imports: DALEX2,
     knitr
 License: GPL-2
 Encoding: UTF-8
