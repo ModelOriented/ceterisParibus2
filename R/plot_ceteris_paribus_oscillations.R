@@ -22,7 +22,7 @@
 #'
 #' apartment <- apartmentsTest[1:2,]
 #'
-#' cp_rf <- ceteris_paribus(explainer_rf, apartment)
+#' cp_rf <- local_profile(explainer_rf, apartment)
 #' plot(cp_rf, color = "_ids_")
 #'
 #' vips <- calculate_oscillations(cp_rf)

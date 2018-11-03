@@ -107,12 +107,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><div class='output co'>#&gt; <span class='message'>Welcome to DALEX (version: 0.2.5).</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘DALEX’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:DALEX2’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    explain, explain.default, loss_root_mean_square,</span>
-#&gt; <span class='message'>    loss_sum_of_squares, theme_mi2, yhat</span></div><div class='input'> </div><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
 <span class='fu'>set.seed</span>(<span class='fl'>59</span>)
 
 <span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
@@ -123,9 +118,14 @@
 
 <span class='no'>apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>,]
 
-<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartment</span>)
-<span class='fu'>calculate_oscillations</span>(<span class='no'>cp_rf</span>)
-<span class='co'># }</span></pre>
+<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>local_profile</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartment</span>)
+<span class='fu'>calculate_oscillations</span>(<span class='no'>cp_rf</span>)</div><div class='output co'>#&gt;             _vname_ _ids_ oscillations
+#&gt; 6          district  1001   1103.42482
+#&gt; 3           surface  1001    290.57755
+#&gt; 4             floor  1001    243.03520
+#&gt; 5          no.rooms  1001    143.53000
+#&gt; 2 construction.year  1001     52.17142
+#&gt; 1          m2.price  1001      0.00000</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

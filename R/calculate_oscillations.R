@@ -20,7 +20,7 @@
 #'
 #' apartment <- apartmentsTest[1,]
 #'
-#' cp_rf <- ceteris_paribus(explainer_rf, apartment)
+#' cp_rf <- local_profile(explainer_rf, apartment)
 #' calculate_oscillations(cp_rf)
 #' }
 calculate_oscillations <- function(x, sort = TRUE, ...) {
