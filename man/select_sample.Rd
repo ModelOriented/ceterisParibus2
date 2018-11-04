@@ -18,7 +18,7 @@ a data frame with selected rows
 }
 \description{
 This function selects subset of rows from data set.
-This is usefull if data is large and we need just a sample to calculate profiles.
+This is useful if data is large and we need just a sample to calculate profiles.
 }
 \details{
 Note that \code{select_subsample} function is S3 generic.

@@ -1,6 +1,6 @@
-#' Print Ceteris Paribus Explainer Summary
+#' Print Individual Variable Explainer Summary
 #'
-#' @param x a ceteris_paribus explainer produced with the `ceteris_paribus()` function
+#' @param x an individual variable profile explainer produced with the `individual_variable_profile()` function
 #' @param ... other arguments that will be passed to `head()`
 #'
 #' @export
@@ -19,10 +19,10 @@
 #'
 #' apartments_small <- select_sample(apartmentsTest, 10)
 #'
-#' cp_rf <- ceteris_paribus(explainer_rf, apartments_small)
+#' cp_rf <- individual_variable_profile(explainer_rf, apartments_small)
 #' cp_rf
 #' }
-print.ceteris_paribus_explainer <- function(x, ...) {
+print.individual_variable_explainer <- function(x, ...) {
   cat("Top profiles    : \n")
   class(x) <- "data.frame"
   print(head(x, ...))

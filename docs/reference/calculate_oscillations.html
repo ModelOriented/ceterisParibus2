@@ -118,14 +118,7 @@
 
 <span class='no'>apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>,]
 
-<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>local_profile</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartment</span>)
-<span class='fu'>calculate_oscillations</span>(<span class='no'>cp_rf</span>)</div><div class='output co'>#&gt;             _vname_ _ids_ oscillations
-#&gt; 6          district  1001   1103.42482
-#&gt; 3           surface  1001    290.57755
-#&gt; 4             floor  1001    243.03520
-#&gt; 5          no.rooms  1001    143.53000
-#&gt; 2 construction.year  1001     52.17142
-#&gt; 1          m2.price  1001      0.00000</div></pre>
+<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>local_profile</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartment</span>)</div><div class='output co'>#&gt; <span class='error'>Error in local_profile.default(model, data, predict_function, new_observation = new_observation,     label = label, variables = variables, grid_points = grid_points,     y = y, ...): could not find function "local_profile.default"</span></div><div class='input'><span class='fu'>calculate_oscillations</span>(<span class='no'>cp_rf</span>)</div><div class='output co'>#&gt; <span class='error'>Error in "ceteris_paribus_explainer" %in% class(x): object 'cp_rf' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

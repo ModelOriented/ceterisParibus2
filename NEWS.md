@@ -3,6 +3,7 @@ ceterisParibus2 0.9
 
 * The main function is now `individual_variable_profile()` or it's alias `local_profile()`.
 * All functions that are not crutial were removed from this version.
+* Major changes in names of classess, functions etc
 
 
 ceterisParibus 0.3.1

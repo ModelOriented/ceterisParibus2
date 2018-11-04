@@ -1,6 +1,6 @@
-#' Calculate Oscillations for Ceteris Paribus Explainer
+#' Calculate Oscillations for Individual Variable Profiles
 #'
-#' @param x a ceteris_paribus explainer produced with the `ceteris_paribus()` function
+#' @param x an individual variable profile explainer produced with the `individual_variable_profile()` function
 #' @param sort a logical value. If TRUE then rows are sorted along the oscillations
 #' @param ... other arguments
 #'
@@ -20,11 +20,11 @@
 #'
 #' apartment <- apartmentsTest[1,]
 #'
-#' cp_rf <- local_profile(explainer_rf, apartment)
+#' cp_rf <- individual_variable_profile(explainer_rf, apartment)
 #' calculate_oscillations(cp_rf)
 #' }
 calculate_oscillations <- function(x, sort = TRUE, ...) {
-  stopifnot("ceteris_paribus_explainer" %in% class(x))
+  stopifnot("individual_variable_explainer" %in% class(x))
 
   observations <- attr(x, "observations")
   variables <- unique(as.character(x$`_vname_`))
@@ -41,7 +41,7 @@ calculate_oscillations <- function(x, sort = TRUE, ...) {
   if (sort) {
     res <- res[order(res$oscillations, decreasing = TRUE),]
   }
-  class(res) = c("ceteris_paribus_oscillations", "data.frame")
+  class(res) = c("individual_variable_oscillations", "data.frame")
   res
 }
 

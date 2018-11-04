@@ -1,7 +1,7 @@
 #' Select Subset of Rows Closest to a Specified Observation
 #'
 #' This function selects subset of rows from data set.
-#' This is usefull if data is large and we need just a sample to calculate profiles.
+#' This is useful if data is large and we need just a sample to calculate profiles.
 #'
 #' Note that \code{select_neighbours} function is S3 generic.
 #' If you want to work on non standard data sources (like H2O ddf, external databases)
@@ -9,8 +9,8 @@
 #'
 #' @param data set of observations
 #' @param observation single observation
-#' @param variables variables that shall be used for calculation of distance. By default these are all variables present in `data` and `observation`
-#' @param distance distance function, by default the `gower_dist` function.
+#' @param variables names of variables that shall be used for calculation of distance. By default these are all variables present in `data` and `observation`
+#' @param distance the distance function, by default the `gower_dist` function.
 #' @param n number of neighbours to select
 #' @param frac if `n` is not specified (NULL), then will be calculated as `frac` * number of rows in `data`. Either `n` or `frac` need to be specified.
 #'

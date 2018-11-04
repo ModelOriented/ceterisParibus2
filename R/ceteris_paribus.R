@@ -1,7 +1,7 @@
-#' Individual Variable Profile
+#' Individual Variable Profile aka Ceteris Paribus Profiles
 #'
 #' This explainer works for individual observations.
-#' For each observation it calculates Ceteris Paribus Profile for selected variables.
+#' For each observation it calculates Individual Variable Profiles for selected variables.
 #' For this reason it is also called 'Local Profile Plot'.
 #'
 #' @param x a model to be explained, or an explainer created with function `DALEX::explain()`.
@@ -56,16 +56,16 @@
 #' }
 #' @export
 #' @rdname local_profile
-local_profile <- function(x, ...)
-  UseMethod("local_profile")
+individual_variable_profile <- function(x, ...)
+  UseMethod("individual_variable_profile")
 
 #' @export
 #' @rdname local_profile
-individual_variable_profile <- local_profile
+local_profile <- individual_variable_profile
 
 #' @export
 #' @rdname local_profile
-local_profile.explainer <- function(x, new_observation, variables = NULL,
+individual_variable_profile.explainer <- function(x, new_observation, variables = NULL,
                                     variable_splits = NULL, grid_points = 101,
                                     ...) {
   # extracts model, data and predict function from the explainer
@@ -87,7 +87,7 @@ local_profile.explainer <- function(x, new_observation, variables = NULL,
 
 #' @export
 #' @rdname local_profile
-local_profile.default <- function(x, data, y = NULL, predict_function = predict,
+individual_variable_profile.default <- function(x, data, y = NULL, predict_function = predict,
                                       new_observation, variables = NULL,
                                       variable_splits = NULL,
                                       grid_points = 101,
@@ -107,7 +107,7 @@ local_profile.default <- function(x, data, y = NULL, predict_function = predict,
   if (is.null(variable_splits)) {
     # need validation data from the explainer
     if (is.null(data))
-      stop("The local_profile() function requires explainers created with specified 'data'.")
+      stop("The individual_variable_profile() function requires explainers created with specified 'data'.")
     # need variables, if not provided, will be extracted from data
     if (is.null(variables))
       variables <- colnames(data)
@@ -153,7 +153,7 @@ local_profile.default <- function(x, data, y = NULL, predict_function = predict,
 
   # prepare final object
   attr(profiles, "observations") <- new_observation
-  class(profiles) = c("ceteris_paribus_explainer", "data.frame")
+  class(profiles) = c("individual_variable_explainer", "data.frame")
   profiles
 }
 

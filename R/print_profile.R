@@ -1,7 +1,7 @@
-#' Print Ceteris Paribus Profiles
+#' Print Individual Variable Profiles
 #'
-#' @param x a ceteris paribus profile produced with the 'calculate_profiles' function
-#' @param ... other arguments that will be passed to head()
+#' @param x a ceteris paribus profile produced with the `individual_variable_profile` function
+#' @param ... other arguments that will be passed to `head()`
 #'
 #' @export
 #'
@@ -35,7 +35,7 @@
 #' new_apartment
 #' small_profiles
 #' }
-print.ceteris_paribus_profile <- function(x, ...) {
+print.individual_variable_profile <- function(x, ...) {
   class(x) <- "data.frame"
   print(head(x, ...))
 }

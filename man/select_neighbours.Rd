@@ -12,9 +12,9 @@ select_neighbours(data, observation, variables = NULL,
 
 \item{observation}{single observation}
 
-\item{variables}{variables that shall be used for calculation of distance. By default these are all variables present in `data` and `observation`}
+\item{variables}{names of variables that shall be used for calculation of distance. By default these are all variables present in `data` and `observation`}
 
-\item{distance}{distance function, by default the `gower_dist` function.}
+\item{distance}{the distance function, by default the `gower_dist` function.}
 
 \item{n}{number of neighbours to select}
 
@@ -25,7 +25,7 @@ a data frame with selected rows
 }
 \description{
 This function selects subset of rows from data set.
-This is usefull if data is large and we need just a sample to calculate profiles.
+This is useful if data is large and we need just a sample to calculate profiles.
 }
 \details{
 Note that \code{select_neighbours} function is S3 generic.

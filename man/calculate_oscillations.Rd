@@ -2,19 +2,19 @@
 % Please edit documentation in R/calculate_oscillations.R
 \name{calculate_oscillations}
 \alias{calculate_oscillations}
-\title{Calculate Oscillations for Ceteris Paribus Explainer}
+\title{Calculate Oscillations for Individual Variable Profiles}
 \usage{
 calculate_oscillations(x, sort = TRUE, ...)
 }
 \arguments{
-\item{x}{a ceteris_paribus explainer produced with the `ceteris_paribus()` function}
+\item{x}{an individual variable profile explainer produced with the `individual_variable_profile()` function}
 
 \item{sort}{a logical value. If TRUE then rows are sorted along the oscillations}
 
 \item{...}{other arguments}
 }
 \description{
-Calculate Oscillations for Ceteris Paribus Explainer
+Calculate Oscillations for Individual Variable Profiles
 }
 \examples{
 library("DALEX")
@@ -30,7 +30,7 @@ explainer_rf <- explain(apartments_rf_model,
 
 apartment <- apartmentsTest[1,]
 
-cp_rf <- local_profile(explainer_rf, apartment)
+cp_rf <- individual_variable_profile(explainer_rf, apartment)
 calculate_oscillations(cp_rf)
 }
 }

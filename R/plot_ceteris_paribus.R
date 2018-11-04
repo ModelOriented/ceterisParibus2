@@ -1,9 +1,9 @@
-#' Plot Ceteris Paribus Explanations
+#' Plot Individual Variable Explanations
 #'
-#' Function 'plot.ceteris_paribus_explainer' plots Ceteris Paribus Plots for selected observations.
+#' Function 'plot.individual_variable_explainer' plots Individual Variable Profiles for selected observations.
 #' Various parameters help to decide what should be plotted, profiles, aggregated profiles, points or rugs.
 #'
-#' @param x a ceteris paribus explainer produced with function `ceteris_paribus()`
+#' @param x a ceteris paribus explainer produced with function `individual_variable_profile()`
 #' @param ... other explainers that shall be plotted together
 #' @param color a character. Either name of a color or name of a variable that should be used for coloring
 #' @param size a numeric. Size of lines to be plotted
@@ -112,7 +112,7 @@
 #'
 #' plot(lp_rf, color = "_label_")
 #' }
-plot.ceteris_paribus_explainer <- function(x, ...,
+plot.individual_variable_explainer <- function(x, ...,
    size = 1,
    alpha = 0.3,
    color = "black",
@@ -259,18 +259,5 @@ plot.ceteris_paribus_explainer <- function(x, ...,
           axis.text = element_text(size = 10)) + xlab("") + ylab("")
 
   pl
-}
-
-
-#' Print Ceteris Paribus Explainer Summary
-#'
-#' See more examples in the \code{ceteris_paribus_layer} function
-#'
-#' @param x a plot_ceteris_paribus_explainer object to plot
-#' @param ... other arguments that will be passed to `print.ggplot()`
-#' @export
-"print.plot_ceteris_paribus_explainer" <- function(x, ...) {
-  class(x) <- class(x)[-1]
-  print(x, ...)
 }
 

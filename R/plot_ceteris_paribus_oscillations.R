@@ -1,6 +1,6 @@
-#' Plot Ceteris Paribus Oscillations
+#' Plot Individual Variable Oscillations
 #'
-#' Function 'plot.ceteris_paribus_oscillations' plots variable importance plots.
+#' Function 'plot.individual_variable_oscillations' plots variable importance plots.
 #'
 #' @param x a ceteris paribus oscillation explainer produced with function `calculate_oscillations()`
 #' @param ... other explainers that shall be plotted together
@@ -29,7 +29,7 @@
 #' vips
 #' plot(vips)
 #' }
-plot.ceteris_paribus_oscillations <- function(x, ...) {
+plot.individual_variable_oscillations <- function(x, ...) {
 
   x <- as.data.frame(x)
   x$`_vname_` <- reorder(x$`_vname_`, x$oscillations, mean, na.rm = TRUE)
@@ -40,6 +40,6 @@ plot.ceteris_paribus_oscillations <- function(x, ...) {
   ggplot(x, aes(`_vname_`, ymin = 0, ymax = oscillations)) +
     geom_errorbar() + coord_flip() +
     facet_wrap(~`_ids_`, scales = "free_y") +
-    ylab("Ceteris Paribus Oscillations") + xlab("") +
+    ylab("Individual Variable Oscillations") + xlab("") +
     theme_mi2()
 }

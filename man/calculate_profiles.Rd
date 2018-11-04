@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculate_profiles.R
 \name{calculate_profiles}
 \alias{calculate_profiles}
-\title{Calculate Ceteris Paribus Profiles}
+\title{Internal Function for Individual Variable Profiles}
 \usage{
 calculate_profiles(data, variable_splits, model, predict_function = predict,
   ...)

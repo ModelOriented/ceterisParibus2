@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Local Profiles via Ceteris Paribus Explainer — local_profile • ceterisParibus2</title>
+<title>Individual Variable Profile — individual_variable_profile • ceterisParibus2</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">Local Profiles via Ceteris Paribus Explainer</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Individual Variable Profile</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -79,25 +79,27 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Local Profiles via Ceteris Paribus Explainer</h1>
+    <h1>Individual Variable Profile</h1>
     </div>
 
     
-    <p>This function calculate Ceteris Paribus profiles for selected data points.</p>
+    <p>This explainer works for individual observations.
+For each observation it calculates Ceteris Paribus Profile for selected variables.
+For this reason it is also called 'Local Profile Plot'.</p>
     
 
-    <pre class="usage"><span class='fu'>local_profile</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>individual_variable_profile</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='fu'>individual_profile_constant</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>local_profile</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for explainer</span>
-<span class='fu'>local_profile</span>(<span class='no'>x</span>, <span class='no'>new_observation</span>, <span class='kw'>variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>variable_splits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>, <span class='no'>...</span>)
+<span class='fu'>individual_variable_profile</span>(<span class='no'>x</span>, <span class='no'>new_observation</span>,
+  <span class='kw'>variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>variable_splits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>local_profile</span>(<span class='no'>x</span>, <span class='no'>data</span>, <span class='kw'>predict_function</span> <span class='kw'>=</span> <span class='no'>predict</span>,
-  <span class='no'>new_observation</span>, <span class='kw'>variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>variable_splits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'>class</span>(<span class='no'>x</span>)[<span class='fl'>1</span>], <span class='no'>...</span>)</pre>
+<span class='fu'>individual_variable_profile</span>(<span class='no'>x</span>, <span class='no'>data</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>predict_function</span> <span class='kw'>=</span> <span class='no'>predict</span>, <span class='no'>new_observation</span>, <span class='kw'>variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>variable_splits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'>class</span>(<span class='no'>x</span>)[<span class='fl'>1</span>], <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -131,24 +133,16 @@
       <td><p>validation dataset, will be extracted from `x` if it's an explainer</p></td>
     </tr>
     <tr>
+      <th>y</th>
+      <td><p>true labels for `data`. If specified then will be added to ceteris paribus plots.</p></td>
+    </tr>
+    <tr>
       <th>predict_function</th>
       <td><p>predict function, will be extracted from `x` if it's an explainer</p></td>
     </tr>
     <tr>
       <th>label</th>
       <td><p>name of the model. By default it's extracted from the 'class' attribute of the model</p></td>
-    </tr>
-    <tr>
-      <th>explainer</th>
-      <td><p>a model to be explained, preprocessed by function `DALEX::explain()`.</p></td>
-    </tr>
-    <tr>
-      <th>observations</th>
-      <td><p>set of observarvation for which profiles are to be calculated</p></td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td><p>true labels for `observations`. If specified then will be added to ceteris paribus plots.</p></td>
     </tr>
     </table>
     
@@ -159,11 +153,8 @@ It's a data frame with calculated average responses.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX2"</span>)</div><div class='output co'>#&gt; <span class='message'>Welcome to DALEX2 (version: 0.9).</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘DALEX2’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:DALEX’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    explain, explain.default, loss_root_mean_square,</span>
-#&gt; <span class='message'>    loss_sum_of_squares, theme_mi2, yhat</span></div><div class='input'><span class='fu'>library</span>(<span class='st'>"ceterisParibus2"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX2"</span>)
+<span class='fu'>library</span>(<span class='st'>"ceterisParibus2"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
 <span class='fu'>set.seed</span>(<span class='fl'>59</span>)
 
 <span class='no'>apartments_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
@@ -174,69 +165,18 @@ It's a data frame with calculated average responses.</p>
 
 <span class='no'>my_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
 
-<span class='no'>lp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>local_profile</span>(<span class='no'>explainer_rf</span>, <span class='no'>my_apartment</span>)
-<span class='no'>lp_rf</span></div><div class='output co'>#&gt; Top profiles    : 
-#&gt;        construction.year surface floor no.rooms    district   _yhat_
-#&gt; 1001                1920     131     3        5 Srodmiescie 4255.354
-#&gt; 1001.1              1921     131     3        5 Srodmiescie 4300.702
-#&gt; 1001.2              1922     131     3        5 Srodmiescie 4301.926
-#&gt; 1001.3              1923     131     3        5 Srodmiescie 4305.352
-#&gt; 1001.4              1923     131     3        5 Srodmiescie 4305.352
-#&gt; 1001.5              1924     131     3        5 Srodmiescie 4267.723
-#&gt;                  _vname_ _ids_      _label_
-#&gt; 1001   construction.year  1001 randomForest
-#&gt; 1001.1 construction.year  1001 randomForest
-#&gt; 1001.2 construction.year  1001 randomForest
-#&gt; 1001.3 construction.year  1001 randomForest
-#&gt; 1001.4 construction.year  1001 randomForest
-#&gt; 1001.5 construction.year  1001 randomForest
-#&gt; 
-#&gt; 
-#&gt; Top observations:
-#&gt;      construction.year surface floor no.rooms    district  _yhat_      _label_
-#&gt; 1001              1976     131     3        5 Srodmiescie 4160.84 randomForest
-#&gt;      _ids_
-#&gt; 1001     1</div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>lp_rf</span>)</div><div class='img'><img src='local_profile-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>lp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>individual_variable_profile</span>(<span class='no'>explainer_rf</span>, <span class='no'>my_apartment</span>)</div><div class='output co'>#&gt; <span class='error'>Error in local_profile.default(model, data, predict_function, new_observation = new_observation,     label = label, variables = variables, grid_points = grid_points,     y = y, ...): could not find function "local_profile.default"</span></div><div class='input'><span class='no'>lp_rf</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'lp_rf' not found</span></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>lp_rf</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(lp_rf): object 'lp_rf' not found</span></div><div class='input'>
 <span class='co'># --------</span>
 <span class='co'># multiclass</span>
 
 <span class='no'>HR_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>status</span> ~ <span class='no'>.</span> , <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HR</span>)
-<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX2/topics/explain'>explain</a></span>(<span class='no'>HR_rf</span>,
-                        <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HRTest</span>,
-                        <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>HRTest</span>)
+<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX2/topics/explain'>explain</a></span>(<span class='no'>HR_rf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HRTest</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>HRTest</span>)
 
 <span class='no'>my_HR</span> <span class='kw'>&lt;-</span> <span class='no'>HRTest</span>[<span class='fl'>1</span>, ]
 
-<span class='no'>lp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>individual_profile_constant</span>(<span class='no'>explainer_rf</span>,
-                       <span class='no'>my_HR</span>)
-<span class='no'>lp_rf</span></div><div class='output co'>#&gt; Top profiles    : 
-#&gt;       gender      age    hours evaluation salary status _vname_ _ids_ _yhat_
-#&gt; 1       male 57.72683 42.31527          2      2  fired  gender     1  0.804
-#&gt; 1.1   female 57.72683 42.31527          2      2  fired  gender     1  0.226
-#&gt; 11      male 20.00212 42.31527          2      2  fired     age     1  0.256
-#&gt; 1.110   male 20.39166 42.31527          2      2  fired     age     1  0.190
-#&gt; 1.2     male 20.78820 42.31527          2      2  fired     age     1  0.220
-#&gt; 1.3     male 21.32338 42.31527          2      2  fired     age     1  0.250
-#&gt;                  _label_
-#&gt; 1     randomForest.fired
-#&gt; 1.1   randomForest.fired
-#&gt; 11    randomForest.fired
-#&gt; 1.110 randomForest.fired
-#&gt; 1.2   randomForest.fired
-#&gt; 1.3   randomForest.fired
-#&gt; 
-#&gt; 
-#&gt; Top observations:
-#&gt;     gender      age    hours evaluation salary status _yhat_
-#&gt; 1     male 57.72683 42.31527          2      2  fired  0.804
-#&gt; 1.1   male 57.72683 42.31527          2      2  fired  0.190
-#&gt; 1.2   male 57.72683 42.31527          2      2  fired  0.006
-#&gt;                   _label_ _ids_
-#&gt; 1      randomForest.fired     1
-#&gt; 1.1       randomForest.ok     1
-#&gt; 1.2 randomForest.promoted     1</div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>lp_rf</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"_label_"</span>)</div><div class='img'><img src='local_profile-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>lp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>individual_variable_profile</span>(<span class='no'>explainer_rf</span>,  <span class='no'>my_HR</span>)</div><div class='output co'>#&gt; <span class='error'>Error in local_profile.default(model, data, predict_function, new_observation = new_observation,     label = label, variables = variables, grid_points = grid_points,     y = y, ...): could not find function "local_profile.default"</span></div><div class='input'><span class='no'>lp_rf</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'lp_rf' not found</span></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>lp_rf</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"_label_"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(lp_rf, color = "_label_"): object 'lp_rf' not found</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

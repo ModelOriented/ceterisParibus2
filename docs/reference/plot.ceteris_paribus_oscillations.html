@@ -119,22 +119,8 @@
 
 <span class='no'>apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>:<span class='fl'>2</span>,]
 
-<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>local_profile</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartment</span>)
-<span class='fu'>plot</span>(<span class='no'>cp_rf</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"_ids_"</span>)</div><div class='img'><img src='plot.ceteris_paribus_oscillations-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>vips</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='calculate_oscillations.html'>calculate_oscillations</a></span>(<span class='no'>cp_rf</span>)
-<span class='no'>vips</span></div><div class='output co'>#&gt;              _vname_ _ids_ oscillations
-#&gt; 11          district  1001   1103.42482
-#&gt; 12          district  1002    506.15312
-#&gt; 5            surface  1001    290.57755
-#&gt; 8              floor  1002    277.28811
-#&gt; 7              floor  1001    243.03520
-#&gt; 6            surface  1002    234.44640
-#&gt; 10          no.rooms  1002    191.77770
-#&gt; 4  construction.year  1002    154.86742
-#&gt; 9           no.rooms  1001    143.53000
-#&gt; 3  construction.year  1001     52.17142
-#&gt; 1           m2.price  1001      0.00000
-#&gt; 2           m2.price  1002      0.00000</div><div class='input'><span class='fu'>plot</span>(<span class='no'>vips</span>)</div><div class='img'><img src='plot.ceteris_paribus_oscillations-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>local_profile</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartment</span>)</div><div class='output co'>#&gt; <span class='error'>Error in local_profile.default(model, data, predict_function, new_observation = new_observation,     label = label, variables = variables, grid_points = grid_points,     y = y, ...): could not find function "local_profile.default"</span></div><div class='input'><span class='fu'>plot</span>(<span class='no'>cp_rf</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"_ids_"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(cp_rf, color = "_ids_"): object 'cp_rf' not found</span></div><div class='input'>
+<span class='no'>vips</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='calculate_oscillations.html'>calculate_oscillations</a></span>(<span class='no'>cp_rf</span>)</div><div class='output co'>#&gt; <span class='error'>Error in "ceteris_paribus_explainer" %in% class(x): object 'cp_rf' not found</span></div><div class='input'><span class='no'>vips</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'vips' not found</span></div><div class='input'><span class='fu'>plot</span>(<span class='no'>vips</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(vips): object 'vips' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

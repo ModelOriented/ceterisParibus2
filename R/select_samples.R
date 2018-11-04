@@ -1,7 +1,7 @@
 #' Select Subset of Rows
 #'
 #' This function selects subset of rows from data set.
-#' This is usefull if data is large and we need just a sample to calculate profiles.
+#' This is useful if data is large and we need just a sample to calculate profiles.
 #'
 #' Note that \code{select_subsample} function is S3 generic.
 #' If you want to work on non standard data sources (like H2O ddf, external databases)

@@ -1,4 +1,4 @@
-#' Calculate Ceteris Paribus Profiles
+#' Internal Function for Individual Variable Profiles
 #'
 #' This function calculates ceteris paribus profiles, i.e. series of predictions from a model calculated for observations with altered single coordinate.
 #'
@@ -70,7 +70,7 @@ calculate_profiles.default <- function(data, variable_splits, model, predict_fun
     new_data
   })
   profile <- do.call(rbind, profiles)
-  class(profile) <- c("ceteris_paribus_profile", class(profile))
+  class(profile) <- c("individual_variable_profile", class(profile))
   profile
 }
 
