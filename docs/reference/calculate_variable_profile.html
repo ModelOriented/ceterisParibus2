@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal Function for Individual Variable Profiles — calculate_profiles • ceterisParibus2</title>
+<title>Internal Function for Individual Variable Profiles — calculate_variable_profile • ceterisParibus2</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -83,11 +83,11 @@
     </div>
 
     
-    <p>This function calculates ceteris paribus profiles, i.e. series of predictions from a model calculated for observations with altered single coordinate.</p>
+    <p>This function calculates individual variable profiles (ceteris paribus profiles), i.e. series of predictions from a model calculated for observations with altered single coordinate.</p>
     
 
-    <pre class="usage"><span class='fu'>calculate_profiles</span>(<span class='no'>data</span>, <span class='no'>variable_splits</span>, <span class='no'>model</span>, <span class='kw'>predict_function</span> <span class='kw'>=</span> <span class='no'>predict</span>,
-  <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>calculate_variable_profile</span>(<span class='no'>data</span>, <span class='no'>variable_splits</span>, <span class='no'>model</span>,
+  <span class='kw'>predict_function</span> <span class='kw'>=</span> <span class='no'>predict</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -120,7 +120,7 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Note that <code>calculate_profiles</code> function is S3 generic.
+    <p>Note that <code>calculate_variable_profile</code> function is S3 generic.
 If you want to work on non standard data sources (like H2O ddf, external databases)
 you should overload it.</p>
     
@@ -131,9 +131,9 @@ you should overload it.</p>
 <span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
                                       <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
 <span class='no'>vars</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"construction.year"</span>, <span class='st'>"surface"</span>, <span class='st'>"floor"</span>, <span class='st'>"no.rooms"</span>, <span class='st'>"district"</span>)
-<span class='no'>variable_splits</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='calculate_variable_splits.html'>calculate_variable_splits</a></span>(<span class='no'>apartments</span>, <span class='no'>vars</span>)
+<span class='no'>variable_splits</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_variable_split</span>(<span class='no'>apartments</span>, <span class='no'>vars</span>)
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>:<span class='fl'>10</span>, ]
-<span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_profiles</span>(<span class='no'>new_apartment</span>, <span class='no'>variable_splits</span>,
+<span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_variable_profile</span>(<span class='no'>new_apartment</span>, <span class='no'>variable_splits</span>,
                                <span class='no'>apartments_rf_model</span>)
 <span class='no'>profiles</span></div><div class='output co'>#&gt;        m2.price construction.year surface floor no.rooms    district   _yhat_
 #&gt; 1001       4644              1920     131     3        5 Srodmiescie 4255.354
@@ -161,7 +161,7 @@ you should overload it.</p>
 #&gt; 3167     5701              1971      55     1        3 Srodmiescie
 #&gt; 1902     2672              1977      98     6        3       Ursus
 #&gt; 5925     3916              1924      33     7        1      Bemowo
-#&gt; 4293     3474              1979     113     5        4     Mokotow</div><div class='input'><span class='no'>small_profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_profiles</span>(<span class='no'>small_apartments</span>, <span class='no'>variable_splits</span>,
+#&gt; 4293     3474              1979     113     5        4     Mokotow</div><div class='input'><span class='no'>small_profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_variable_profile</span>(<span class='no'>small_apartments</span>, <span class='no'>variable_splits</span>,
                                <span class='no'>apartments_rf_model</span>)
 <span class='no'>small_profiles</span></div><div class='output co'>#&gt;        m2.price construction.year surface floor no.rooms district   _yhat_
 #&gt; 8946       2174              1920     123     8        4     Wola 2871.626
@@ -190,7 +190,7 @@ you should overload it.</p>
 #&gt; 1198     5821              1947      43     2        1 Srodmiescie
 #&gt; 6647     5952              1938      30     2        1 Srodmiescie
 #&gt; 4027     6457              1926      29     3        1 Srodmiescie
-#&gt; 2655     5596              1950      25     6        1 Srodmiescie</div><div class='input'><span class='no'>small_profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_profiles</span>(<span class='no'>small_apartments</span>, <span class='no'>variable_splits</span>,
+#&gt; 2655     5596              1950      25     6        1 Srodmiescie</div><div class='input'><span class='no'>small_profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_variable_profile</span>(<span class='no'>small_apartments</span>, <span class='no'>variable_splits</span>,
                                <span class='no'>apartments_rf_model</span>)
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;   construction.year surface floor no.rooms    district
 #&gt; 1              1953      25     3        1 Srodmiescie</div><div class='input'><span class='no'>small_profiles</span></div><div class='output co'>#&gt;        m2.price construction.year surface floor no.rooms    district   _yhat_

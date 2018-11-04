@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate Oscillations for Individual Variable Profiles — calculate_oscillations • ceterisParibus2</title>
+<title>Calculate Oscillations for Individual Variable Profiles — calculate_variable_oscillations • ceterisParibus2</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,7 +86,7 @@
     <p>Calculate Oscillations for Individual Variable Profiles</p>
     
 
-    <pre class="usage"><span class='fu'>calculate_oscillations</span>(<span class='no'>x</span>, <span class='kw'>sort</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>calculate_variable_oscillations</span>(<span class='no'>x</span>, <span class='kw'>sort</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -118,7 +118,7 @@
 
 <span class='no'>apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>,]
 
-<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>individual_variable_profile</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartment</span>)</div><div class='output co'>#&gt; <span class='error'>Error in local_profile.default(model, data, predict_function, new_observation = new_observation,     label = label, variables = variables, grid_points = grid_points,     y = y, ...): could not find function "local_profile.default"</span></div><div class='input'><span class='fu'>calculate_oscillations</span>(<span class='no'>cp_rf</span>)</div><div class='output co'>#&gt; <span class='error'>Error in "individual_variable_explainer" %in% class(x): object 'cp_rf' not found</span></div></pre>
+<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>individual_variable_profile</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartment</span>)</div><div class='output co'>#&gt; <span class='error'>Error in local_profile.default(model, data, predict_function, new_observation = new_observation,     label = label, variables = variables, grid_points = grid_points,     y = y, ...): could not find function "local_profile.default"</span></div><div class='input'><span class='fu'>calculate_variable_oscillations</span>(<span class='no'>cp_rf</span>)</div><div class='output co'>#&gt; <span class='error'>Error in "individual_variable_explainer" %in% class(x): object 'cp_rf' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
