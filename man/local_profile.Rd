@@ -2,21 +2,21 @@
 % Please edit documentation in R/ceteris_paribus.R
 \name{local_profile}
 \alias{local_profile}
-\alias{individual_profile_constant}
+\alias{individual_variable_profile}
 \alias{local_profile.explainer}
 \alias{local_profile.default}
-\title{Local Profiles via Ceteris Paribus Explainer}
+\title{Individual Variable Profile}
 \usage{
 local_profile(x, ...)
 
-individual_profile_constant(x, ...)
+individual_variable_profile(x, ...)
 
 \method{local_profile}{explainer}(x, new_observation, variables = NULL,
   variable_splits = NULL, grid_points = 101, ...)
 
-\method{local_profile}{default}(x, data, predict_function = predict,
-  new_observation, variables = NULL, variable_splits = NULL,
-  grid_points = 101, label = class(x)[1], ...)
+\method{local_profile}{default}(x, data, y = NULL,
+  predict_function = predict, new_observation, variables = NULL,
+  variable_splits = NULL, grid_points = 101, label = class(x)[1], ...)
 }
 \arguments{
 \item{x}{a model to be explained, or an explainer created with function `DALEX::explain()`.}
@@ -33,22 +33,20 @@ individual_profile_constant(x, ...)
 
 \item{data}{validation dataset, will be extracted from `x` if it's an explainer}
 
+\item{y}{true labels for `data`. If specified then will be added to ceteris paribus plots.}
+
 \item{predict_function}{predict function, will be extracted from `x` if it's an explainer}
 
 \item{label}{name of the model. By default it's extracted from the 'class' attribute of the model}
-
-\item{explainer}{a model to be explained, preprocessed by function `DALEX::explain()`.}
-
-\item{observations}{set of observarvation for which profiles are to be calculated}
-
-\item{y}{true labels for `observations`. If specified then will be added to ceteris paribus plots.}
 }
 \value{
 An object of the class 'ceteris_paribus_explainer'.
 It's a data frame with calculated average responses.
 }
 \description{
-This function calculate Ceteris Paribus profiles for selected data points.
+This explainer works for individual observations.
+For each observation it calculates Ceteris Paribus Profile for selected variables.
+For this reason it is also called 'Local Profile Plot'.
 }
 \examples{
 library("DALEX2")
@@ -65,7 +63,7 @@ explainer_rf <- explain(apartments_rf,
 
 my_apartment <- apartmentsTest[1, ]
 
-lp_rf <- local_profile(explainer_rf, my_apartment)
+lp_rf <- individual_variable_profile(explainer_rf, my_apartment)
 lp_rf
 
 plot(lp_rf)
@@ -74,14 +72,11 @@ plot(lp_rf)
 # multiclass
 
 HR_rf <- randomForest(status ~ . , data = HR)
-explainer_rf <- explain(HR_rf,
-                        data = HRTest,
-                        y = HRTest)
+explainer_rf <- explain(HR_rf, data = HRTest, y = HRTest)
 
 my_HR <- HRTest[1, ]
 
-lp_rf <- individual_profile_constant(explainer_rf,
-                       my_HR)
+lp_rf <- individual_variable_profile(explainer_rf,  my_HR)
 lp_rf
 
 plot(lp_rf, color = "_label_")
