@@ -52,7 +52,7 @@
 #'
 #' my_HR <- HRTest[1, ]
 #'
-#' lp_rf <- local_profile(explainer_rf,
+#' lp_rf <- individual_profile_constant(explainer_rf,
 #'                        my_HR)
 #' lp_rf
 #'
@@ -64,6 +64,9 @@
 local_profile <- function(x, ...)
   UseMethod("local_profile")
 
+#' @export
+#' @rdname local_profile
+individual_profile_constant <- local_profile
 
 #' @export
 #' @rdname local_profile

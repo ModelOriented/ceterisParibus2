@@ -1,3 +1,10 @@
+ceterisParibus2 0.9
+----------------------------------------------------------------
+
+* The main function is now `individual_profile_constant()` or it's alias `local_profile()`.
+* All functions that are not crutial were removed from this version.
+
+
 ceterisParibus 0.3.1
 ----------------------------------------------------------------
 

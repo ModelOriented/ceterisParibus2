@@ -38,57 +38,79 @@
 #' library("randomForest")
 #' set.seed(59)
 #'
-#' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
-#'       no.rooms + district, data = apartments)
+#' apartments_rf <- randomForest(m2.price ~ construction.year + surface + floor +
+#'                                 no.rooms + district, data = apartments)
+#' explainer_rf <- explain(apartments_rf,
+#'                         data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 #'
-#' explainer_rf <- explain(apartments_rf_model,
-#'       data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+#' apartments_lm <- lm(m2.price ~ construction.year + surface + floor +
+#'                                 no.rooms + district, data = apartments)
+#' explainer_lm <- explain(apartments_lm,
+#'                         data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 #'
-#' apartments_small <- apartmentsTest[1:20,]
-#' apartments_small_1 <- apartmentsTest[1,]
-#' apartments_small_2 <- select_sample(apartmentsTest, n = 20)
-#' apartments_small_3 <- select_neighbours(apartmentsTest, apartments_small_1, n = 20)
+#' library("e1071")
+#' apartments_svm <- svm(m2.price ~ construction.year + surface + floor +
+#'                                 no.rooms + district, data = apartments)
+#' explainer_svm <- explain(apartments_svm,
+#'                         data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 #'
-#' cp_rf <- ceteris_paribus(explainer_rf, apartments_small)
-#' cp_rf_1 <- ceteris_paribus(explainer_rf, apartments_small_1)
-#' cp_rf_2 <- ceteris_paribus(explainer_rf, apartments_small_2)
-#' cp_rf_3 <- ceteris_paribus(explainer_rf, apartments_small_3)
-#' cp_rf
+#' # individual explanations
+#' my_apartment <- apartmentsTest[1, ]
 #'
-#' cp_rf_y <- ceteris_paribus(explainer_rf, apartments_small, y = apartments_small$m2.price)
-#' cp_rf_y1 <- ceteris_paribus(explainer_rf, apartments_small_1, y = apartments_small_1$m2.price)
-#' cp_rf_y2 <- ceteris_paribus(explainer_rf, apartments_small_2, y = apartments_small_2$m2.price)
-#' cp_rf_y3 <- ceteris_paribus(explainer_rf, apartments_small_3, y = apartments_small_3$m2.price)
+#' # for random forest
+#' lp_rf <- local_profile(explainer_rf, my_apartment)
+#' lp_rf
 #'
-#' plot(cp_rf_y, show_profiles = TRUE, show_observations = TRUE,
-#'                show_residuals = TRUE, color = "black",
-#'                alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5,
-#'                size_points = 2, size_rugs = 0.5)
+#' plot(lp_rf)
 #'
-#' plot(cp_rf_y, show_profiles = TRUE, show_observations = TRUE,
-#'                show_residuals = TRUE, color = "black",
-#'                selected_variables = c("construction.year", "surface"),
-#'                alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5,
-#'                size_points = 2, size_rugs = 0.5)
+#' # for others
+#' lp_lm <- local_profile(explainer_lm, my_apartment)
+#' plot(lp_rf, lp_lm, color = "_label_")
 #'
-#' plot(cp_rf_y1, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
-#'                show_residuals = TRUE, alpha = 0.5, size_points = 3,
-#'                alpha_points = 1, size_rugs = 0.5)
+#' # for others
+#' lp_svm <- local_profile(explainer_svm, my_apartment)
+#' plot(lp_rf, lp_lm, lp_svm, color = "_label_")
 #'
-#' plot(cp_rf_y2, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
-#'                alpha = 0.2, alpha_points = 1, size_rugs = 0.5)
+#' # more parameters
+#' plot(lp_rf, lp_lm, lp_svm, color = "_label_",
+#'    show_profiles = TRUE, show_observations = TRUE,
+#'    show_rugs = TRUE,
+#'    alpha = 0.3, alpha_points = 1,
+#'    size_points = 5, size_rugs = 0.5)
 #'
-#' plot(cp_rf_y3, show_profiles = TRUE, show_rugs = TRUE,
-#'                show_residuals = TRUE, alpha = 0.2, color_residuals = "orange", size_rugs = 0.5)
+#' plot(lp_rf, show_profiles = TRUE, show_observations = TRUE,
+#'    color = "black",
+#'    selected_variables = c("construction.year", "surface"),
+#'    alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5,
+#'    size_points = 5, size_rugs = 0.5)
 #'
-#' plot(cp_rf_y1, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
-#'                show_residuals = TRUE, alpha = 0.5, color = "surface", size_points = 3)
+#' plot(lp_rf, show_profiles = TRUE, show_observations = TRUE,
+#'    color = "surface",
+#'    selected_variables = c("construction.year", "surface"),
+#'    alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5,
+#'    size_points = 5, size_rugs = 0.5)
 #'
-#' plot(cp_rf_y2, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
-#'                size = 0.5, alpha = 0.5, color = "surface")
+#' plot(lp_rf, show_profiles = TRUE, show_observations = TRUE,
+#'    color = "darkblue", aggregate_profiles = mean,
+#'    selected_variables = c("construction.year", "surface"),
+#'    alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5,
+#'    size_points = 5, size_rugs = 0.5)
 #'
-#' plot(cp_rf_y, show_profiles = TRUE, show_rugs = TRUE, size_rugs = 0.5,
-#'                show_residuals = FALSE, aggregate_profiles = mean, color = "darkblue")
+#' # --------
+#' # multiclass
+#'
+#' HR_rf <- randomForest(status ~ . , data = HR)
+#' explainer_rf <- explain(HR_rf,
+#'                         data = HRTest,
+#'                         y = HRTest)
+#'
+#' my_HR <- HRTest[1, ]
+#'
+#' lp_rf <- local_profile(explainer_rf,
+#'                        my_HR)
+#' lp_rf
+#'
+#' plot(lp_rf, color = "_label_")
 #' }
 plot.ceteris_paribus_explainer <- function(x, ...,
    size = 1,
@@ -111,7 +133,6 @@ plot.ceteris_paribus_explainer <- function(x, ...,
    show_rugs = FALSE,
    show_residuals = FALSE,
    aggregate_profiles = NULL,
-   as.gg = FALSE,
    facet_ncol = NULL, selected_variables = NULL) {
 
   # if there is more explainers, they should be merged into a single data frame

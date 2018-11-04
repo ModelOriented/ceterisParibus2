@@ -2,11 +2,14 @@
 % Please edit documentation in R/ceteris_paribus.R
 \name{local_profile}
 \alias{local_profile}
+\alias{individual_profile_constant}
 \alias{local_profile.explainer}
 \alias{local_profile.default}
 \title{Local Profiles via Ceteris Paribus Explainer}
 \usage{
 local_profile(x, ...)
+
+individual_profile_constant(x, ...)
 
 \method{local_profile}{explainer}(x, new_observation, variables = NULL,
   variable_splits = NULL, grid_points = 101, ...)
@@ -77,7 +80,7 @@ explainer_rf <- explain(HR_rf,
 
 my_HR <- HRTest[1, ]
 
-lp_rf <- local_profile(explainer_rf,
+lp_rf <- individual_profile_constant(explainer_rf,
                        my_HR)
 lp_rf
 
