@@ -1,8 +1,8 @@
 #' Internal Function for Individual Variable Profiles
 #'
-#' This function calculates ceteris paribus profiles, i.e. series of predictions from a model calculated for observations with altered single coordinate.
+#' This function calculates individual variable profiles (ceteris paribus profiles), i.e. series of predictions from a model calculated for observations with altered single coordinate.
 #'
-#' Note that \code{calculate_profiles} function is S3 generic.
+#' Note that \code{calculate_variable_profile} function is S3 generic.
 #' If you want to work on non standard data sources (like H2O ddf, external databases)
 #' you should overload it.
 #'
@@ -21,16 +21,16 @@
 #' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
 #'                                       no.rooms + district, data = apartments)
 #' vars <- c("construction.year", "surface", "floor", "no.rooms", "district")
-#' variable_splits <- calculate_variable_splits(apartments, vars)
+#' variable_splits <- calculate_variable_split(apartments, vars)
 #' new_apartment <- apartmentsTest[1:10, ]
-#' profiles <- calculate_profiles(new_apartment, variable_splits,
+#' profiles <- calculate_variable_profile(new_apartment, variable_splits,
 #'                                apartments_rf_model)
 #' profiles
 #'
 #' # only subset of observations
 #' small_apartments <- select_sample(apartmentsTest, n = 10)
 #' small_apartments
-#' small_profiles <- calculate_profiles(small_apartments, variable_splits,
+#' small_profiles <- calculate_variable_profile(small_apartments, variable_splits,
 #'                                apartments_rf_model)
 #' small_profiles
 #'
@@ -38,17 +38,17 @@
 #' new_apartment <- apartments[1, 2:6]
 #' small_apartments <- select_neighbours(apartmentsTest, new_apartment, n = 10)
 #' small_apartments
-#' small_profiles <- calculate_profiles(small_apartments, variable_splits,
+#' small_profiles <- calculate_variable_profile(small_apartments, variable_splits,
 #'                                apartments_rf_model)
 #' new_apartment
 #' small_profiles
 #' }
 #' @export
-calculate_profiles <- function(data, variable_splits, model, predict_function = predict, ...) {
-  UseMethod("calculate_profiles")
+calculate_variable_profile <- function(data, variable_splits, model, predict_function = predict, ...) {
+  UseMethod("calculate_variable_profile")
 }
 #' @export
-calculate_profiles.default <- function(data, variable_splits, model, predict_function = predict, ...) {
+calculate_variable_profile.default <- function(data, variable_splits, model, predict_function = predict, ...) {
   variables <- names(variable_splits)
   profiles <- lapply(variables, function(variable) {
     split_points <- variable_splits[[variable]]
@@ -75,14 +75,14 @@ calculate_profiles.default <- function(data, variable_splits, model, predict_fun
 }
 
 
-#' Calculate Split Points for Selected Variables
+#' Internal Function for Split Points for Selected Variables
 #'
 #' This function calculate candidate splits for each selected variable.
 #' For numerical variables splits are calculated as percentiles
 #' (in general uniform quantiles of the length grid_points).
 #' For all other variables splits are calculated as unique values.
 #'
-#' Note that \code{calculate_variable_splits} function is S3 generic.
+#' Note that \code{calculate_variable_split} function is S3 generic.
 #' If you want to work on non standard data sources (like H2O ddf, external databases)
 #' you should overload it.
 #'
@@ -100,14 +100,14 @@ calculate_profiles.default <- function(data, variable_splits, model, predict_fun
 #' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
 #'                                       no.rooms + district, data = apartments)
 #' vars <- c("construction.year", "surface", "floor", "no.rooms", "district")
-#' calculate_variable_splits(apartments, vars)
+#' calculate_variable_split(apartments, vars)
 #' }
 #' @export
-calculate_variable_splits <- function(data, variables = colnames(data), grid_points = 101) {
-  UseMethod("calculate_variable_splits")
+calculate_variable_split <- function(data, variables = colnames(data), grid_points = 101) {
+  UseMethod("calculate_variable_split")
 }
 #' @export
-calculate_variable_splits.default <- function(data, variables = colnames(data), grid_points = 101) {
+calculate_variable_split.default <- function(data, variables = colnames(data), grid_points = 101) {
   variable_splits <- lapply(variables, function(var) {
     selected_column <- data[,var]
     if (is.numeric(selected_column)) {

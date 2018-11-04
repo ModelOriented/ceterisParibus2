@@ -1,6 +1,6 @@
-#' Print Individual Variable Profiles
+#' Prints Individual Variable Profiles
 #'
-#' @param x a ceteris paribus profile produced with the `individual_variable_profile` function
+#' @param x an individual variable profile explainer produced with the `individual_variable_profile` function
 #' @param ... other arguments that will be passed to `head()`
 #'
 #' @export
@@ -10,32 +10,22 @@
 #'  \dontrun{
 #' library("randomForest")
 #' set.seed(59)
+#'
 #' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
-#'                                       no.rooms + district, data = apartments)
-#' vars <- c("construction.year", "surface", "floor", "no.rooms", "district")
-#' variable_splits <- calculate_variable_splits(apartments, vars)
-#' new_apartment <- apartmentsTest[1:10, ]
-#' profiles <- calculate_profiles(new_apartment, variable_splits,
-#'                                apartments_rf_model)
-#' profiles
+#'       no.rooms + district, data = apartments)
 #'
-#' # only subset of observations
-#' small_apartments <- select_sample(apartmentsTest, n = 10)
-#' small_apartments
-#' small_profiles <- calculate_profiles(small_apartments, variable_splits,
-#'                                apartments_rf_model)
-#' small_profiles
+#' explainer_rf <- explain(apartments_rf_model,
+#'       data = apartmentsTest, y = apartmentsTest$m2.price)
 #'
-#' # neighbors for a selected observation
-#' new_apartment <- apartments[1, 2:6]
-#' small_apartments <- select_neighbours(apartmentsTest, new_apartment, n = 10)
-#' small_apartments
-#' small_profiles <- calculate_profiles(small_apartments, variable_splits,
-#'                                apartments_rf_model)
-#' new_apartment
-#' small_profiles
+#' apartment <- apartmentsTest[1:2,]
+#'
+#' cp_rf <- individual_variable_profile(explainer_rf, apartment)
+#' plot(cp_rf, color = "_ids_")
+#'
+#' vips <- individual_variable_oscillations(cp_rf)
+#' vips
 #' }
-print.individual_variable_profile <- function(x, ...) {
+print.individual_variable_profile_oscillations <- function(x, ...) {
   class(x) <- "data.frame"
   print(head(x, ...))
 }

@@ -2,20 +2,17 @@
 % Please edit documentation in R/ceteris_paribus.R
 \name{individual_variable_profile}
 \alias{individual_variable_profile}
-\alias{local_profile}
 \alias{individual_variable_profile.explainer}
 \alias{individual_variable_profile.default}
-\title{Individual Variable Profile aka Ceteris Paribus Profiles}
+\title{Calculates Individual Variable Profiles aka Ceteris Paribus Profiles}
 \usage{
 individual_variable_profile(x, ...)
 
-local_profile(x, ...)
-
-\method{individual_variable_profile}{explainer}(x, new_observation,
+\method{individual_variable_profile}{explainer}(x, new_observation, y = NULL,
   variables = NULL, variable_splits = NULL, grid_points = 101, ...)
 
-\method{individual_variable_profile}{default}(x, data, y = NULL,
-  predict_function = predict, new_observation, variables = NULL,
+\method{individual_variable_profile}{default}(x, data,
+  predict_function = predict, new_observation, y = NULL, variables = NULL,
   variable_splits = NULL, grid_points = 101, label = class(x)[1], ...)
 }
 \arguments{
@@ -25,6 +22,8 @@ local_profile(x, ...)
 
 \item{new_observation}{a new observation with columns that corresponds to variables used in the model}
 
+\item{y}{true labels for `new_observation`. If specified then will be added to ceteris paribus plots.}
+
 \item{variables}{names of variables for which profiles shall be calculated. Will be passed to `calculate_variable_splits()`. If NULL then all variables from the validation data will be used.}
 
 \item{variable_splits}{named list of splits for variables, in most cases created with `calculate_variable_splits()`. If NULL then it will be calculated based on validation data avaliable in the `explainer`.}
@@ -32,8 +31,6 @@ local_profile(x, ...)
 \item{grid_points}{number of points for profile. Will be passed to `calculate_variable_splits()`.}
 
 \item{data}{validation dataset, will be extracted from `x` if it's an explainer}
-
-\item{y}{true labels for `data`. If specified then will be added to ceteris paribus plots.}
 
 \item{predict_function}{predict function, will be extracted from `x` if it's an explainer}
 

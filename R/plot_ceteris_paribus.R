@@ -1,6 +1,6 @@
-#' Plot Individual Variable Explanations
+#' Plots Individual Variable Profile Explanations
 #'
-#' Function 'plot.individual_variable_explainer' plots Individual Variable Profiles for selected observations.
+#' Function 'plot.individual_variable_profile_explainer' plots Individual Variable Profiles for selected observations.
 #' Various parameters help to decide what should be plotted, profiles, aggregated profiles, points or rugs.
 #'
 #' @param x a ceteris paribus explainer produced with function `individual_variable_profile()`
@@ -58,17 +58,17 @@
 #' my_apartment <- apartmentsTest[1, ]
 #'
 #' # for random forest
-#' lp_rf <- local_profile(explainer_rf, my_apartment)
+#' lp_rf <- individual_variable_profile(explainer_rf, my_apartment)
 #' lp_rf
 #'
 #' plot(lp_rf)
 #'
 #' # for others
-#' lp_lm <- local_profile(explainer_lm, my_apartment)
+#' lp_lm <- individual_variable_profile(explainer_lm, my_apartment)
 #' plot(lp_rf, lp_lm, color = "_label_")
 #'
 #' # for others
-#' lp_svm <- local_profile(explainer_svm, my_apartment)
+#' lp_svm <- individual_variable_profile(explainer_svm, my_apartment)
 #' plot(lp_rf, lp_lm, lp_svm, color = "_label_")
 #'
 #' # more parameters
@@ -100,19 +100,16 @@
 #' # multiclass
 #'
 #' HR_rf <- randomForest(status ~ . , data = HR)
-#' explainer_rf <- explain(HR_rf,
-#'                         data = HRTest,
-#'                         y = HRTest)
+#' explainer_rf <- explain(HR_rf, data = HRTest, y = HRTest)
 #'
 #' my_HR <- HRTest[1, ]
 #'
-#' lp_rf <- local_profile(explainer_rf,
-#'                        my_HR)
+#' lp_rf <- individual_variable_profile(explainer_rf, my_HR)
 #' lp_rf
 #'
 #' plot(lp_rf, color = "_label_")
 #' }
-plot.individual_variable_explainer <- function(x, ...,
+plot.individual_variable_profile_explainer <- function(x, ...,
    size = 1,
    alpha = 0.3,
    color = "black",

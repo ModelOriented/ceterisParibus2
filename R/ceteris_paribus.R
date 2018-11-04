@@ -1,4 +1,4 @@
-#' Individual Variable Profile aka Ceteris Paribus Profiles
+#' Calculates Individual Variable Profiles aka Ceteris Paribus Profiles
 #'
 #' This explainer works for individual observations.
 #' For each observation it calculates Individual Variable Profiles for selected variables.
@@ -7,8 +7,8 @@
 #' @param x a model to be explained, or an explainer created with function `DALEX::explain()`.
 #' @param data validation dataset, will be extracted from `x` if it's an explainer
 #' @param predict_function predict function, will be extracted from `x` if it's an explainer
-#' @param y true labels for `data`. If specified then will be added to ceteris paribus plots.
 #' @param new_observation a new observation with columns that corresponds to variables used in the model
+#' @param y true labels for `new_observation`. If specified then will be added to ceteris paribus plots.
 #' @param variables names of variables for which profiles shall be calculated. Will be passed to `calculate_variable_splits()`. If NULL then all variables from the validation data will be used.
 #' @param ... other parameters
 #' @param variable_splits named list of splits for variables, in most cases created with `calculate_variable_splits()`. If NULL then it will be calculated based on validation data avaliable in the `explainer`.
@@ -61,11 +61,7 @@ individual_variable_profile <- function(x, ...)
 
 #' @export
 #' @rdname local_profile
-local_profile <- individual_variable_profile
-
-#' @export
-#' @rdname local_profile
-individual_variable_profile.explainer <- function(x, new_observation, variables = NULL,
+individual_variable_profile.explainer <- function(x, new_observation, y = NULL, variables = NULL,
                                     variable_splits = NULL, grid_points = 101,
                                     ...) {
   # extracts model, data and predict function from the explainer
@@ -73,9 +69,8 @@ individual_variable_profile.explainer <- function(x, new_observation, variables 
   data <- x$data
   predict_function <- x$predict_function
   label <- x$label
-  y <- x$y
 
-  local_profile.default(model, data, predict_function,
+  individual_variable_profile.default(model, data, predict_function,
                              new_observation = new_observation,
                              label = label,
                              variables = variables,
@@ -87,8 +82,8 @@ individual_variable_profile.explainer <- function(x, new_observation, variables 
 
 #' @export
 #' @rdname local_profile
-individual_variable_profile.default <- function(x, data, y = NULL, predict_function = predict,
-                                      new_observation, variables = NULL,
+individual_variable_profile.default <- function(x, data, predict_function = predict,
+                                      new_observation, y = NULL, variables = NULL,
                                       variable_splits = NULL,
                                       grid_points = 101,
                                       label = class(x)[1], ...) {
@@ -112,11 +107,11 @@ individual_variable_profile.default <- function(x, data, y = NULL, predict_funct
     if (is.null(variables))
       variables <- colnames(data)
 
-    variable_splits <- calculate_variable_splits(data, variables = variables, grid_points = grid_points)
+    variable_splits <- calculate_variable_split(data, variables = variables, grid_points = grid_points)
   }
 
   # calculate profiles
-  profiles <- calculate_profiles(new_observation,
+  profiles <- calculate_variable_profile(new_observation,
                                  variable_splits, x, predict_function)
 
   # if there is more then one collumn with `_yhat_`
@@ -153,7 +148,7 @@ individual_variable_profile.default <- function(x, data, y = NULL, predict_funct
 
   # prepare final object
   attr(profiles, "observations") <- new_observation
-  class(profiles) = c("individual_variable_explainer", "data.frame")
+  class(profiles) = c("individual_variable_profile_explainer", "data.frame")
   profiles
 }
 

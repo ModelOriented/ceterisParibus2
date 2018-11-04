@@ -1,7 +1,7 @@
-#' Calculate Oscillations for Individual Variable Profiles
+#' Calculates Oscillations for Individual Variable Profiles
 #'
 #' @param x an individual variable profile explainer produced with the `individual_variable_profile()` function
-#' @param sort a logical value. If TRUE then rows are sorted along the oscillations
+#' @param sort a logical value. If `TRUE` then rows are sorted along the oscillations
 #' @param ... other arguments
 #'
 #' @export
@@ -20,11 +20,11 @@
 #'
 #' apartment <- apartmentsTest[1,]
 #'
-#' cp_rf <- individual_variable_profile(explainer_rf, apartment)
-#' calculate_oscillations(cp_rf)
+#' ivp_rf <- individual_variable_profile(explainer_rf, apartment)
+#' individual_variable_oscillations(ivp_rf)
 #' }
-calculate_oscillations <- function(x, sort = TRUE, ...) {
-  stopifnot("individual_variable_explainer" %in% class(x))
+individual_variable_oscillations <- function(x, sort = TRUE, ...) {
+  stopifnot("individual_variable_profile_explainer" %in% class(x))
 
   observations <- attr(x, "observations")
   variables <- unique(as.character(x$`_vname_`))
@@ -41,7 +41,7 @@ calculate_oscillations <- function(x, sort = TRUE, ...) {
   if (sort) {
     res <- res[order(res$oscillations, decreasing = TRUE),]
   }
-  class(res) = c("individual_variable_oscillations", "data.frame")
+  class(res) = c("individual_variable_profile_oscillations", "data.frame")
   res
 }
 
