@@ -55,7 +55,7 @@ calculate_variable_profile.default <- function(data, variable_splits, model, pre
 
     # remember ids of selected points
     if (is.null(rownames(data))) {
-      ids <- rep(1:nrow(data), each = length(split_points))
+      ids <- rep(1:nrow(data), each = length(split_points)) # it never goes here, because null rownames are automatically setted to 1:n
     } else {
       ids <- rep(rownames(data), each = length(split_points))
     }
