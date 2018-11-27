@@ -67,5 +67,10 @@ test_that("Output format - plot_ceteris_paribus - more parameters",{
   expect_is(plot(lp_rf, show_profiles = TRUE, show_observations = TRUE,
                  show_residuals = TRUE, only_numerical = FALSE),
             "ggplot")
+  expect_is(plot(lp_rf, show_profiles = TRUE, show_observations = TRUE,
+                 show_residuals = TRUE, only_numerical = FALSE,
+                 aggregate_profiles = mean,
+                 color = "_label_"),
+            "ggplot")
 })
 
