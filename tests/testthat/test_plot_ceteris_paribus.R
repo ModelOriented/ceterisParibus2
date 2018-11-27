@@ -58,5 +58,14 @@ test_that("Output format - plot_ceteris_paribus - more parameters",{
                  alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5,
                  size_points = 5, size_rugs = 0.5),
             "ggplot")
+  expect_is(plot(lp_rf, show_profiles = TRUE, show_observations = TRUE,
+                 show_residuals = TRUE, color_residuals = "blue"),
+            "ggplot")
+  expect_is(plot(lp_rf, show_profiles = TRUE, show_observations = TRUE,
+                 show_residuals = TRUE),
+            "ggplot")
+  expect_is(plot(lp_rf, show_profiles = TRUE, show_observations = TRUE,
+                 show_residuals = TRUE, only_numerical = FALSE),
+            "ggplot")
 })
 
