@@ -41,10 +41,12 @@
 #' plot(lce_rf)
 #' }
 #' @export
+#' @rdname local_conditional_expectations
 local_conditional_expectations <- function(x, ...)
   UseMethod("local_conditional_expectations")
 
 #' @export
+#' @rdname local_conditional_expectations
 local_conditional_expectations.explainer <- function(x, new_observation, y = NULL, variables = NULL,
                                                   variable_splits = NULL, grid_points = 101,
                                                   ...) {
@@ -63,6 +65,7 @@ local_conditional_expectations.explainer <- function(x, new_observation, y = NUL
                                       ...)
 }
 #' @export
+#' @rdname local_conditional_expectations
 local_conditional_expectations.default <- function(x, data, predict_function = predict, 
                                                    new_observation, y = NULL, variable_splits = NULL, 
                                                    variables = NULL, grid_points = 101, 

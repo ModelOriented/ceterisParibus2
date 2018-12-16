@@ -2,18 +2,25 @@
 % Please edit documentation in R/local_conditional_expectations.R
 \name{local_conditional_expectations}
 \alias{local_conditional_expectations}
+\alias{local_conditional_expectations.explainer}
+\alias{local_conditional_expectations.default}
 \title{Local Conditional Expectation Explainer}
 \usage{
 local_conditional_expectations(x, ...)
+
+\method{local_conditional_expectations}{explainer}(x, new_observation,
+  y = NULL, variables = NULL, variable_splits = NULL,
+  grid_points = 101, ...)
+
+\method{local_conditional_expectations}{default}(x, data,
+  predict_function = predict, new_observation, y = NULL,
+  variable_splits = NULL, variables = NULL, grid_points = 101,
+  label = class(x)[1])
 }
 \arguments{
 \item{x}{a model to be explained, or an explainer created with function `DALEX::explain()`.}
 
 \item{...}{other parameters}
-
-\item{data}{validation dataset, will be extracted from `x` if it's an explainer}
-
-\item{predict_function}{predict function, will be extracted from `x` if it's an explainer}
 
 \item{new_observation}{a new observation with columns that corresponds to variables used in the model}
 
@@ -24,6 +31,10 @@ local_conditional_expectations(x, ...)
 \item{variable_splits}{named list of splits for variables, in most cases created with `calculate_variable_splits()`. If NULL then it will be calculated based on validation data avaliable in the `explainer`.}
 
 \item{grid_points}{number of points for profile. Will be passed to `calculate_variable_splits()`.}
+
+\item{data}{validation dataset, will be extracted from `x` if it's an explainer}
+
+\item{predict_function}{predict function, will be extracted from `x` if it's an explainer}
 
 \item{label}{name of the model. By default it's extracted from the 'class' attribute of the model}
 }
