@@ -69,7 +69,7 @@ local_conditional_expectations.explainer <- function(x, new_observation, y = NUL
 local_conditional_expectations.default <- function(x, data, predict_function = predict, 
                                                    new_observation, y = NULL, variable_splits = NULL, 
                                                    variables = NULL, grid_points = 101, 
-                                                   label = class(x)[1]) {
+                                                   label = class(x)[1], ...) {
 
   model <- x
   

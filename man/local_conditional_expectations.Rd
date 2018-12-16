@@ -15,7 +15,7 @@ local_conditional_expectations(x, ...)
 \method{local_conditional_expectations}{default}(x, data,
   predict_function = predict, new_observation, y = NULL,
   variable_splits = NULL, variables = NULL, grid_points = 101,
-  label = class(x)[1])
+  label = class(x)[1], ...)
 }
 \arguments{
 \item{x}{a model to be explained, or an explainer created with function `DALEX::explain()`.}
