@@ -54,5 +54,7 @@ lce_rf
 
 lce_rf <- local_conditional_expectations(explainer_rf, new_apartment, y = new_apartment$m2.price)
 lce_rf
+
+plot(lce_rf)
 }
 }
