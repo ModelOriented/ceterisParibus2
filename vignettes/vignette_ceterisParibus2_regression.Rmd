@@ -83,7 +83,8 @@ plot(ivp_lm_neighbours)
 
 ivp_lm_random <- individual_variable_profile(m_lm,
                             data = random_dragons,
-                            new_observation =  new_observation)
+                            new_observation =  new_observation,
+                            variable_splits = variable_splits)
 plot(ivp_lm_random)
 ```
 
