@@ -8,9 +8,10 @@
   alpha = 0.3, color = "black", size_points = 2, alpha_points = 1,
   color_points = color, size_rugs = 0.5, alpha_rugs = 1,
   color_rugs = color, size_residuals = 1, alpha_residuals = 1,
-  color_residuals = color, only_numerical = TRUE, show_profiles = TRUE,
-  show_observations = TRUE, show_rugs = FALSE, show_residuals = FALSE,
-  aggregate_profiles = NULL, facet_ncol = NULL, selected_variables = NULL)
+  color_residuals = color, only_numerical = TRUE,
+  show_profiles = TRUE, show_observations = TRUE, show_rugs = FALSE,
+  show_residuals = FALSE, aggregate_profiles = NULL,
+  facet_ncol = NULL, selected_variables = NULL)
 }
 \arguments{
 \item{x}{a ceteris paribus explainer produced with function `individual_variable_profile()`}
@@ -33,7 +34,7 @@
 
 \item{alpha_rugs}{a numeric between 0 and 1. Opacity of rugs}
 
-\item{color_rugs}{a character. Either name of a color or name of a variable that should be used for coloring}
+\item{color_rugs}{a character. Either name of a color or name of a theme_mi2variable that should be used for coloring}
 
 \item{size_residuals}{a numeric. Size of line and points to be plotted for residuals}
 
@@ -65,7 +66,7 @@ Function 'plot.individual_variable_profile_explainer' plots Individual Variable 
 Various parameters help to decide what should be plotted, profiles, aggregated profiles, points or rugs.
 }
 \examples{
-library("DALEX")
+library("DALEX2")
  \dontrun{
 library("randomForest")
 set.seed(59)
@@ -73,21 +74,21 @@ set.seed(59)
 apartments_rf <- randomForest(m2.price ~ construction.year + surface + floor +
                                 no.rooms + district, data = apartments)
 explainer_rf <- explain(apartments_rf,
-                        data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+                        data = apartments_test[,2:6], y = apartments_test$m2.price)
 
 apartments_lm <- lm(m2.price ~ construction.year + surface + floor +
                                 no.rooms + district, data = apartments)
 explainer_lm <- explain(apartments_lm,
-                        data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+                        data = apartments_test[,2:6], y = apartments_test$m2.price)
 
 library("e1071")
 apartments_svm <- svm(m2.price ~ construction.year + surface + floor +
                                 no.rooms + district, data = apartments)
 explainer_svm <- explain(apartments_svm,
-                        data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+                        data = apartments_test[,2:6], y = apartments_test$m2.price)
 
 # individual explanations
-my_apartment <- apartmentsTest[1, ]
+my_apartment <- apartments_test[1, ]
 
 # for random forest
 lp_rf <- individual_variable_profile(explainer_rf, my_apartment)

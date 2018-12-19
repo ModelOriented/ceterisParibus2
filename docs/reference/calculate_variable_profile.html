@@ -126,31 +126,242 @@ you should overload it.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX2"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
 <span class='fu'>set.seed</span>(<span class='fl'>59</span>)
 <span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
                                       <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
 <span class='no'>vars</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"construction.year"</span>, <span class='st'>"surface"</span>, <span class='st'>"floor"</span>, <span class='st'>"no.rooms"</span>, <span class='st'>"district"</span>)
-<span class='no'>variable_splits</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_variable_split</span>(<span class='no'>apartments</span>, <span class='no'>vars</span>)
-<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>:<span class='fl'>10</span>, ]
+<span class='no'>variable_splits</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='calculate_variable_split.html'>calculate_variable_split</a></span>(<span class='no'>apartments</span>, <span class='no'>vars</span>)
+<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartments_test</span>[<span class='fl'>1</span>:<span class='fl'>10</span>, ]
 <span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_variable_profile</span>(<span class='no'>new_apartment</span>, <span class='no'>variable_splits</span>,
                                <span class='no'>apartments_rf_model</span>)
-<span class='no'>profiles</span></div><div class='output co'>#&gt;        m2.price construction.year surface floor no.rooms    district   _yhat_
-#&gt; 1001       4644              1920     131     3        5 Srodmiescie 4255.354
-#&gt; 1001.1     4644              1921     131     3        5 Srodmiescie 4300.702
-#&gt; 1001.2     4644              1922     131     3        5 Srodmiescie 4301.926
-#&gt; 1001.3     4644              1923     131     3        5 Srodmiescie 4305.352
-#&gt; 1001.4     4644              1924     131     3        5 Srodmiescie 4267.723
-#&gt; 1001.5     4644              1925     131     3        5 Srodmiescie 4264.109
-#&gt;                  _vname_ _ids_
-#&gt; 1001   construction.year  1001
-#&gt; 1001.1 construction.year  1001
-#&gt; 1001.2 construction.year  1001
-#&gt; 1001.3 construction.year  1001
-#&gt; 1001.4 construction.year  1001
-#&gt; 1001.5 construction.year  1001</div><div class='input'>
+<span class='no'>profiles</span></div><div class='output co'>#&gt;           m2.price construction.year surface floor no.rooms    district
+#&gt; 1001          4644           1920.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.1        4644           1921.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.2        4644           1922.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.3        4644           1923.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.4        4644           1924.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.5        4644           1925.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.6        4644           1926.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.7        4644           1927.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.8        4644           1927.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.9        4644           1928.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.10       4644           1929.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.11       4644           1929.89  131.00  3.00        5 Srodmiescie
+#&gt; 1001.12       4644           1931.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.13       4644           1932.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.14       4644           1933.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.15       4644           1934.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.16       4644           1934.84  131.00  3.00        5 Srodmiescie
+#&gt; 1001.17       4644           1935.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.18       4644           1936.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.19       4644           1937.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.20       4644           1938.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.21       4644           1939.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.22       4644           1940.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.23       4644           1941.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.24       4644           1941.76  131.00  3.00        5 Srodmiescie
+#&gt; 1001.25       4644           1943.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.26       4644           1944.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.27       4644           1945.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.28       4644           1946.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.29       4644           1946.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.30       4644           1947.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.31       4644           1948.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.32       4644           1949.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.33       4644           1949.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.34       4644           1950.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.35       4644           1951.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.36       4644           1952.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.37       4644           1953.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.38       4644           1954.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.39       4644           1956.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.40       4644           1956.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.41       4644           1957.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.42       4644           1957.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.43       4644           1958.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.44       4644           1959.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.45       4644           1959.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.46       4644           1960.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.47       4644           1961.53  131.00  3.00        5 Srodmiescie
+#&gt; 1001.48       4644           1962.52  131.00  3.00        5 Srodmiescie
+#&gt; 1001.49       4644           1963.51  131.00  3.00        5 Srodmiescie
+#&gt; 1001.50       4644           1965.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.51       4644           1965.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.52       4644           1967.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.53       4644           1967.47  131.00  3.00        5 Srodmiescie
+#&gt; 1001.54       4644           1968.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.55       4644           1969.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.56       4644           1970.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.57       4644           1971.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.58       4644           1971.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.59       4644           1972.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.60       4644           1973.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.61       4644           1974.39  131.00  3.00        5 Srodmiescie
+#&gt; 1001.62       4644           1975.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.63       4644           1977.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.64       4644           1977.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.65       4644           1978.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.66       4644           1980.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.67       4644           1981.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.68       4644           1982.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.69       4644           1983.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.70       4644           1984.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.71       4644           1985.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.72       4644           1985.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.73       4644           1986.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.74       4644           1987.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.75       4644           1988.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.76       4644           1989.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.77       4644           1990.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.78       4644           1990.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.79       4644           1991.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.80       4644           1992.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.81       4644           1993.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.82       4644           1993.18  131.00  3.00        5 Srodmiescie
+#&gt; 1001.83       4644           1994.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.84       4644           1995.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.85       4644           1996.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.86       4644           1997.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.87       4644           1997.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.88       4644           1998.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.89       4644           1999.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.90       4644           2000.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.91       4644           2001.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.92       4644           2002.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.93       4644           2003.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.94       4644           2004.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.95       4644           2005.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.96       4644           2005.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.97       4644           2007.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.98       4644           2008.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.99       4644           2009.00  131.00  3.00        5 Srodmiescie
+#&gt; 1001.100      4644           2010.00  131.00  3.00        5 Srodmiescie
+#&gt; 1002          3082           1920.00  112.00  9.00        4     Mokotow
+#&gt; 1002.1        3082           1921.00  112.00  9.00        4     Mokotow
+#&gt; 1002.2        3082           1922.00  112.00  9.00        4     Mokotow
+#&gt; 1002.3        3082           1923.00  112.00  9.00        4     Mokotow
+#&gt; 1002.4        3082           1924.00  112.00  9.00        4     Mokotow
+#&gt; 1002.5        3082           1925.00  112.00  9.00        4     Mokotow
+#&gt; 1002.6        3082           1926.00  112.00  9.00        4     Mokotow
+#&gt; 1002.7        3082           1927.00  112.00  9.00        4     Mokotow
+#&gt; 1002.8        3082           1927.00  112.00  9.00        4     Mokotow
+#&gt; 1002.9        3082           1928.00  112.00  9.00        4     Mokotow
+#&gt;             _yhat_           _vname_ _ids_
+#&gt; 1001      4255.354 construction.year  1001
+#&gt; 1001.1    4300.702 construction.year  1001
+#&gt; 1001.2    4301.926 construction.year  1001
+#&gt; 1001.3    4305.352 construction.year  1001
+#&gt; 1001.4    4267.723 construction.year  1001
+#&gt; 1001.5    4264.109 construction.year  1001
+#&gt; 1001.6    4261.677 construction.year  1001
+#&gt; 1001.7    4238.826 construction.year  1001
+#&gt; 1001.8    4238.826 construction.year  1001
+#&gt; 1001.9    4253.075 construction.year  1001
+#&gt; 1001.10   4247.620 construction.year  1001
+#&gt; 1001.11   4242.458 construction.year  1001
+#&gt; 1001.12   4216.846 construction.year  1001
+#&gt; 1001.13   4221.414 construction.year  1001
+#&gt; 1001.14   4225.165 construction.year  1001
+#&gt; 1001.15   4229.791 construction.year  1001
+#&gt; 1001.16   4209.735 construction.year  1001
+#&gt; 1001.17   4209.735 construction.year  1001
+#&gt; 1001.18   4189.539 construction.year  1001
+#&gt; 1001.19   4213.459 construction.year  1001
+#&gt; 1001.20   4219.782 construction.year  1001
+#&gt; 1001.21   4193.273 construction.year  1001
+#&gt; 1001.22   4167.281 construction.year  1001
+#&gt; 1001.23   4157.711 construction.year  1001
+#&gt; 1001.24   4157.370 construction.year  1001
+#&gt; 1001.25   4145.599 construction.year  1001
+#&gt; 1001.26   4136.761 construction.year  1001
+#&gt; 1001.27   4137.529 construction.year  1001
+#&gt; 1001.28   4125.729 construction.year  1001
+#&gt; 1001.29   4125.729 construction.year  1001
+#&gt; 1001.30   4122.412 construction.year  1001
+#&gt; 1001.31   4113.901 construction.year  1001
+#&gt; 1001.32   4122.415 construction.year  1001
+#&gt; 1001.33   4122.415 construction.year  1001
+#&gt; 1001.34   4123.531 construction.year  1001
+#&gt; 1001.35   4127.812 construction.year  1001
+#&gt; 1001.36   4127.789 construction.year  1001
+#&gt; 1001.37   4128.001 construction.year  1001
+#&gt; 1001.38   4127.478 construction.year  1001
+#&gt; 1001.39   4126.514 construction.year  1001
+#&gt; 1001.40   4126.514 construction.year  1001
+#&gt; 1001.41   4123.760 construction.year  1001
+#&gt; 1001.42   4123.760 construction.year  1001
+#&gt; 1001.43   4124.019 construction.year  1001
+#&gt; 1001.44   4134.426 construction.year  1001
+#&gt; 1001.45   4134.426 construction.year  1001
+#&gt; 1001.46   4145.110 construction.year  1001
+#&gt; 1001.47   4156.892 construction.year  1001
+#&gt; 1001.48   4152.235 construction.year  1001
+#&gt; 1001.49   4151.282 construction.year  1001
+#&gt; 1001.50   4148.171 construction.year  1001
+#&gt; 1001.51   4148.171 construction.year  1001
+#&gt; 1001.52   4150.367 construction.year  1001
+#&gt; 1001.53   4152.467 construction.year  1001
+#&gt; 1001.54   4155.783 construction.year  1001
+#&gt; 1001.55   4155.603 construction.year  1001
+#&gt; 1001.56   4163.589 construction.year  1001
+#&gt; 1001.57   4164.579 construction.year  1001
+#&gt; 1001.58   4164.579 construction.year  1001
+#&gt; 1001.59   4162.593 construction.year  1001
+#&gt; 1001.60   4166.334 construction.year  1001
+#&gt; 1001.61   4164.331 construction.year  1001
+#&gt; 1001.62   4164.331 construction.year  1001
+#&gt; 1001.63   4152.706 construction.year  1001
+#&gt; 1001.64   4152.706 construction.year  1001
+#&gt; 1001.65   4152.069 construction.year  1001
+#&gt; 1001.66   4141.466 construction.year  1001
+#&gt; 1001.67   4146.475 construction.year  1001
+#&gt; 1001.68   4155.826 construction.year  1001
+#&gt; 1001.69   4155.835 construction.year  1001
+#&gt; 1001.70   4159.167 construction.year  1001
+#&gt; 1001.71   4165.917 construction.year  1001
+#&gt; 1001.72   4165.917 construction.year  1001
+#&gt; 1001.73   4178.803 construction.year  1001
+#&gt; 1001.74   4190.869 construction.year  1001
+#&gt; 1001.75   4169.681 construction.year  1001
+#&gt; 1001.76   4174.008 construction.year  1001
+#&gt; 1001.77   4173.804 construction.year  1001
+#&gt; 1001.78   4173.804 construction.year  1001
+#&gt; 1001.79   4176.923 construction.year  1001
+#&gt; 1001.80   4192.352 construction.year  1001
+#&gt; 1001.81   4197.173 construction.year  1001
+#&gt; 1001.82   4203.862 construction.year  1001
+#&gt; 1001.83   4233.521 construction.year  1001
+#&gt; 1001.84   4292.069 construction.year  1001
+#&gt; 1001.85   4277.968 construction.year  1001
+#&gt; 1001.86   4267.546 construction.year  1001
+#&gt; 1001.87   4267.546 construction.year  1001
+#&gt; 1001.88   4264.769 construction.year  1001
+#&gt; 1001.89   4262.131 construction.year  1001
+#&gt; 1001.90   4276.898 construction.year  1001
+#&gt; 1001.91   4299.570 construction.year  1001
+#&gt; 1001.92   4305.047 construction.year  1001
+#&gt; 1001.93   4304.345 construction.year  1001
+#&gt; 1001.94   4300.306 construction.year  1001
+#&gt; 1001.95   4302.471 construction.year  1001
+#&gt; 1001.96   4302.471 construction.year  1001
+#&gt; 1001.97   4298.705 construction.year  1001
+#&gt; 1001.98   4304.087 construction.year  1001
+#&gt; 1001.99   4301.128 construction.year  1001
+#&gt; 1001.100  4300.863 construction.year  1001
+#&gt; 1002      3541.469 construction.year  1002
+#&gt; 1002.1    3588.630 construction.year  1002
+#&gt; 1002.2    3592.125 construction.year  1002
+#&gt; 1002.3    3583.712 construction.year  1002
+#&gt; 1002.4    3569.780 construction.year  1002
+#&gt; 1002.5    3565.148 construction.year  1002
+#&gt; 1002.6    3565.571 construction.year  1002
+#&gt; 1002.7    3595.734 construction.year  1002
+#&gt; 1002.8    3595.734 construction.year  1002
+#&gt; 1002.9    3617.611 construction.year  1002
+#&gt;  [ reached getOption("max.print") -- omitted 4029 rows ]</div><div class='input'>
 <span class='co'># only subset of observations</span>
-<span class='no'>small_apartments</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='select_sample.html'>select_sample</a></span>(<span class='no'>apartmentsTest</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+<span class='no'>small_apartments</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='select_sample.html'>select_sample</a></span>(<span class='no'>apartments_test</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)
 <span class='no'>small_apartments</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
 #&gt; 8946     2174              1959     123     8        4        Wola
 #&gt; 4458     4319              1927      68     8        2      Ochota
@@ -163,23 +374,234 @@ you should overload it.</p>
 #&gt; 5925     3916              1924      33     7        1      Bemowo
 #&gt; 4293     3474              1979     113     5        4     Mokotow</div><div class='input'><span class='no'>small_profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_variable_profile</span>(<span class='no'>small_apartments</span>, <span class='no'>variable_splits</span>,
                                <span class='no'>apartments_rf_model</span>)
-<span class='no'>small_profiles</span></div><div class='output co'>#&gt;        m2.price construction.year surface floor no.rooms district   _yhat_
-#&gt; 8946       2174              1920     123     8        4     Wola 2871.626
-#&gt; 8946.1     2174              1921     123     8        4     Wola 2896.045
-#&gt; 8946.2     2174              1922     123     8        4     Wola 2901.677
-#&gt; 8946.3     2174              1923     123     8        4     Wola 2891.101
-#&gt; 8946.4     2174              1924     123     8        4     Wola 2890.361
-#&gt; 8946.5     2174              1925     123     8        4     Wola 2891.720
-#&gt;                  _vname_ _ids_
-#&gt; 8946   construction.year  8946
-#&gt; 8946.1 construction.year  8946
-#&gt; 8946.2 construction.year  8946
-#&gt; 8946.3 construction.year  8946
-#&gt; 8946.4 construction.year  8946
-#&gt; 8946.5 construction.year  8946</div><div class='input'>
+<span class='no'>small_profiles</span></div><div class='output co'>#&gt;           m2.price construction.year surface floor no.rooms    district
+#&gt; 8946          2174           1920.00  123.00  8.00        4        Wola
+#&gt; 8946.1        2174           1921.00  123.00  8.00        4        Wola
+#&gt; 8946.2        2174           1922.00  123.00  8.00        4        Wola
+#&gt; 8946.3        2174           1923.00  123.00  8.00        4        Wola
+#&gt; 8946.4        2174           1924.00  123.00  8.00        4        Wola
+#&gt; 8946.5        2174           1925.00  123.00  8.00        4        Wola
+#&gt; 8946.6        2174           1926.00  123.00  8.00        4        Wola
+#&gt; 8946.7        2174           1927.00  123.00  8.00        4        Wola
+#&gt; 8946.8        2174           1927.00  123.00  8.00        4        Wola
+#&gt; 8946.9        2174           1928.00  123.00  8.00        4        Wola
+#&gt; 8946.10       2174           1929.00  123.00  8.00        4        Wola
+#&gt; 8946.11       2174           1929.89  123.00  8.00        4        Wola
+#&gt; 8946.12       2174           1931.00  123.00  8.00        4        Wola
+#&gt; 8946.13       2174           1932.00  123.00  8.00        4        Wola
+#&gt; 8946.14       2174           1933.00  123.00  8.00        4        Wola
+#&gt; 8946.15       2174           1934.00  123.00  8.00        4        Wola
+#&gt; 8946.16       2174           1934.84  123.00  8.00        4        Wola
+#&gt; 8946.17       2174           1935.00  123.00  8.00        4        Wola
+#&gt; 8946.18       2174           1936.00  123.00  8.00        4        Wola
+#&gt; 8946.19       2174           1937.00  123.00  8.00        4        Wola
+#&gt; 8946.20       2174           1938.00  123.00  8.00        4        Wola
+#&gt; 8946.21       2174           1939.00  123.00  8.00        4        Wola
+#&gt; 8946.22       2174           1940.00  123.00  8.00        4        Wola
+#&gt; 8946.23       2174           1941.00  123.00  8.00        4        Wola
+#&gt; 8946.24       2174           1941.76  123.00  8.00        4        Wola
+#&gt; 8946.25       2174           1943.00  123.00  8.00        4        Wola
+#&gt; 8946.26       2174           1944.00  123.00  8.00        4        Wola
+#&gt; 8946.27       2174           1945.00  123.00  8.00        4        Wola
+#&gt; 8946.28       2174           1946.00  123.00  8.00        4        Wola
+#&gt; 8946.29       2174           1946.00  123.00  8.00        4        Wola
+#&gt; 8946.30       2174           1947.00  123.00  8.00        4        Wola
+#&gt; 8946.31       2174           1948.00  123.00  8.00        4        Wola
+#&gt; 8946.32       2174           1949.00  123.00  8.00        4        Wola
+#&gt; 8946.33       2174           1949.00  123.00  8.00        4        Wola
+#&gt; 8946.34       2174           1950.00  123.00  8.00        4        Wola
+#&gt; 8946.35       2174           1951.00  123.00  8.00        4        Wola
+#&gt; 8946.36       2174           1952.00  123.00  8.00        4        Wola
+#&gt; 8946.37       2174           1953.00  123.00  8.00        4        Wola
+#&gt; 8946.38       2174           1954.00  123.00  8.00        4        Wola
+#&gt; 8946.39       2174           1956.00  123.00  8.00        4        Wola
+#&gt; 8946.40       2174           1956.00  123.00  8.00        4        Wola
+#&gt; 8946.41       2174           1957.00  123.00  8.00        4        Wola
+#&gt; 8946.42       2174           1957.00  123.00  8.00        4        Wola
+#&gt; 8946.43       2174           1958.00  123.00  8.00        4        Wola
+#&gt; 8946.44       2174           1959.00  123.00  8.00        4        Wola
+#&gt; 8946.45       2174           1959.00  123.00  8.00        4        Wola
+#&gt; 8946.46       2174           1960.00  123.00  8.00        4        Wola
+#&gt; 8946.47       2174           1961.53  123.00  8.00        4        Wola
+#&gt; 8946.48       2174           1962.52  123.00  8.00        4        Wola
+#&gt; 8946.49       2174           1963.51  123.00  8.00        4        Wola
+#&gt; 8946.50       2174           1965.00  123.00  8.00        4        Wola
+#&gt; 8946.51       2174           1965.00  123.00  8.00        4        Wola
+#&gt; 8946.52       2174           1967.00  123.00  8.00        4        Wola
+#&gt; 8946.53       2174           1967.47  123.00  8.00        4        Wola
+#&gt; 8946.54       2174           1968.00  123.00  8.00        4        Wola
+#&gt; 8946.55       2174           1969.00  123.00  8.00        4        Wola
+#&gt; 8946.56       2174           1970.00  123.00  8.00        4        Wola
+#&gt; 8946.57       2174           1971.00  123.00  8.00        4        Wola
+#&gt; 8946.58       2174           1971.00  123.00  8.00        4        Wola
+#&gt; 8946.59       2174           1972.00  123.00  8.00        4        Wola
+#&gt; 8946.60       2174           1973.00  123.00  8.00        4        Wola
+#&gt; 8946.61       2174           1974.39  123.00  8.00        4        Wola
+#&gt; 8946.62       2174           1975.00  123.00  8.00        4        Wola
+#&gt; 8946.63       2174           1977.00  123.00  8.00        4        Wola
+#&gt; 8946.64       2174           1977.00  123.00  8.00        4        Wola
+#&gt; 8946.65       2174           1978.00  123.00  8.00        4        Wola
+#&gt; 8946.66       2174           1980.00  123.00  8.00        4        Wola
+#&gt; 8946.67       2174           1981.00  123.00  8.00        4        Wola
+#&gt; 8946.68       2174           1982.00  123.00  8.00        4        Wola
+#&gt; 8946.69       2174           1983.00  123.00  8.00        4        Wola
+#&gt; 8946.70       2174           1984.00  123.00  8.00        4        Wola
+#&gt; 8946.71       2174           1985.00  123.00  8.00        4        Wola
+#&gt; 8946.72       2174           1985.00  123.00  8.00        4        Wola
+#&gt; 8946.73       2174           1986.00  123.00  8.00        4        Wola
+#&gt; 8946.74       2174           1987.00  123.00  8.00        4        Wola
+#&gt; 8946.75       2174           1988.00  123.00  8.00        4        Wola
+#&gt; 8946.76       2174           1989.00  123.00  8.00        4        Wola
+#&gt; 8946.77       2174           1990.00  123.00  8.00        4        Wola
+#&gt; 8946.78       2174           1990.00  123.00  8.00        4        Wola
+#&gt; 8946.79       2174           1991.00  123.00  8.00        4        Wola
+#&gt; 8946.80       2174           1992.00  123.00  8.00        4        Wola
+#&gt; 8946.81       2174           1993.00  123.00  8.00        4        Wola
+#&gt; 8946.82       2174           1993.18  123.00  8.00        4        Wola
+#&gt; 8946.83       2174           1994.00  123.00  8.00        4        Wola
+#&gt; 8946.84       2174           1995.00  123.00  8.00        4        Wola
+#&gt; 8946.85       2174           1996.00  123.00  8.00        4        Wola
+#&gt; 8946.86       2174           1997.00  123.00  8.00        4        Wola
+#&gt; 8946.87       2174           1997.00  123.00  8.00        4        Wola
+#&gt; 8946.88       2174           1998.00  123.00  8.00        4        Wola
+#&gt; 8946.89       2174           1999.00  123.00  8.00        4        Wola
+#&gt; 8946.90       2174           2000.00  123.00  8.00        4        Wola
+#&gt; 8946.91       2174           2001.00  123.00  8.00        4        Wola
+#&gt; 8946.92       2174           2002.00  123.00  8.00        4        Wola
+#&gt; 8946.93       2174           2003.00  123.00  8.00        4        Wola
+#&gt; 8946.94       2174           2004.00  123.00  8.00        4        Wola
+#&gt; 8946.95       2174           2005.00  123.00  8.00        4        Wola
+#&gt; 8946.96       2174           2005.00  123.00  8.00        4        Wola
+#&gt; 8946.97       2174           2007.00  123.00  8.00        4        Wola
+#&gt; 8946.98       2174           2008.00  123.00  8.00        4        Wola
+#&gt; 8946.99       2174           2009.00  123.00  8.00        4        Wola
+#&gt; 8946.100      2174           2010.00  123.00  8.00        4        Wola
+#&gt; 4458          4319           1920.00   68.00  8.00        2      Ochota
+#&gt; 4458.1        4319           1921.00   68.00  8.00        2      Ochota
+#&gt; 4458.2        4319           1922.00   68.00  8.00        2      Ochota
+#&gt; 4458.3        4319           1923.00   68.00  8.00        2      Ochota
+#&gt; 4458.4        4319           1924.00   68.00  8.00        2      Ochota
+#&gt; 4458.5        4319           1925.00   68.00  8.00        2      Ochota
+#&gt; 4458.6        4319           1926.00   68.00  8.00        2      Ochota
+#&gt; 4458.7        4319           1927.00   68.00  8.00        2      Ochota
+#&gt; 4458.8        4319           1927.00   68.00  8.00        2      Ochota
+#&gt; 4458.9        4319           1928.00   68.00  8.00        2      Ochota
+#&gt;             _yhat_           _vname_ _ids_
+#&gt; 8946      2871.626 construction.year  8946
+#&gt; 8946.1    2896.045 construction.year  8946
+#&gt; 8946.2    2901.677 construction.year  8946
+#&gt; 8946.3    2891.101 construction.year  8946
+#&gt; 8946.4    2890.361 construction.year  8946
+#&gt; 8946.5    2891.720 construction.year  8946
+#&gt; 8946.6    2892.942 construction.year  8946
+#&gt; 8946.7    2905.699 construction.year  8946
+#&gt; 8946.8    2905.699 construction.year  8946
+#&gt; 8946.9    2932.324 construction.year  8946
+#&gt; 8946.10   2917.397 construction.year  8946
+#&gt; 8946.11   2883.184 construction.year  8946
+#&gt; 8946.12   2851.169 construction.year  8946
+#&gt; 8946.13   2841.408 construction.year  8946
+#&gt; 8946.14   2845.897 construction.year  8946
+#&gt; 8946.15   2846.826 construction.year  8946
+#&gt; 8946.16   2657.459 construction.year  8946
+#&gt; 8946.17   2657.459 construction.year  8946
+#&gt; 8946.18   2577.608 construction.year  8946
+#&gt; 8946.19   2582.147 construction.year  8946
+#&gt; 8946.20   2483.345 construction.year  8946
+#&gt; 8946.21   2432.402 construction.year  8946
+#&gt; 8946.22   2381.263 construction.year  8946
+#&gt; 8946.23   2369.587 construction.year  8946
+#&gt; 8946.24   2367.230 construction.year  8946
+#&gt; 8946.25   2368.147 construction.year  8946
+#&gt; 8946.26   2365.981 construction.year  8946
+#&gt; 8946.27   2361.409 construction.year  8946
+#&gt; 8946.28   2365.369 construction.year  8946
+#&gt; 8946.29   2365.369 construction.year  8946
+#&gt; 8946.30   2361.936 construction.year  8946
+#&gt; 8946.31   2361.667 construction.year  8946
+#&gt; 8946.32   2368.523 construction.year  8946
+#&gt; 8946.33   2368.523 construction.year  8946
+#&gt; 8946.34   2371.393 construction.year  8946
+#&gt; 8946.35   2365.525 construction.year  8946
+#&gt; 8946.36   2372.786 construction.year  8946
+#&gt; 8946.37   2358.771 construction.year  8946
+#&gt; 8946.38   2361.055 construction.year  8946
+#&gt; 8946.39   2375.162 construction.year  8946
+#&gt; 8946.40   2375.162 construction.year  8946
+#&gt; 8946.41   2378.031 construction.year  8946
+#&gt; 8946.42   2378.031 construction.year  8946
+#&gt; 8946.43   2384.643 construction.year  8946
+#&gt; 8946.44   2386.002 construction.year  8946
+#&gt; 8946.45   2386.002 construction.year  8946
+#&gt; 8946.46   2387.544 construction.year  8946
+#&gt; 8946.47   2386.314 construction.year  8946
+#&gt; 8946.48   2387.674 construction.year  8946
+#&gt; 8946.49   2380.782 construction.year  8946
+#&gt; 8946.50   2381.437 construction.year  8946
+#&gt; 8946.51   2381.437 construction.year  8946
+#&gt; 8946.52   2375.481 construction.year  8946
+#&gt; 8946.53   2375.481 construction.year  8946
+#&gt; 8946.54   2375.780 construction.year  8946
+#&gt; 8946.55   2375.927 construction.year  8946
+#&gt; 8946.56   2376.794 construction.year  8946
+#&gt; 8946.57   2374.447 construction.year  8946
+#&gt; 8946.58   2374.447 construction.year  8946
+#&gt; 8946.59   2371.784 construction.year  8946
+#&gt; 8946.60   2369.082 construction.year  8946
+#&gt; 8946.61   2367.777 construction.year  8946
+#&gt; 8946.62   2369.347 construction.year  8946
+#&gt; 8946.63   2368.459 construction.year  8946
+#&gt; 8946.64   2368.459 construction.year  8946
+#&gt; 8946.65   2370.128 construction.year  8946
+#&gt; 8946.66   2374.941 construction.year  8946
+#&gt; 8946.67   2379.404 construction.year  8946
+#&gt; 8946.68   2377.033 construction.year  8946
+#&gt; 8946.69   2376.172 construction.year  8946
+#&gt; 8946.70   2372.465 construction.year  8946
+#&gt; 8946.71   2373.540 construction.year  8946
+#&gt; 8946.72   2373.540 construction.year  8946
+#&gt; 8946.73   2364.137 construction.year  8946
+#&gt; 8946.74   2362.709 construction.year  8946
+#&gt; 8946.75   2364.096 construction.year  8946
+#&gt; 8946.76   2367.460 construction.year  8946
+#&gt; 8946.77   2379.249 construction.year  8946
+#&gt; 8946.78   2379.249 construction.year  8946
+#&gt; 8946.79   2387.260 construction.year  8946
+#&gt; 8946.80   2385.929 construction.year  8946
+#&gt; 8946.81   2391.043 construction.year  8946
+#&gt; 8946.82   2395.738 construction.year  8946
+#&gt; 8946.83   2438.211 construction.year  8946
+#&gt; 8946.84   2613.570 construction.year  8946
+#&gt; 8946.85   2693.063 construction.year  8946
+#&gt; 8946.86   2720.310 construction.year  8946
+#&gt; 8946.87   2720.310 construction.year  8946
+#&gt; 8946.88   2715.563 construction.year  8946
+#&gt; 8946.89   2729.473 construction.year  8946
+#&gt; 8946.90   2742.353 construction.year  8946
+#&gt; 8946.91   2747.852 construction.year  8946
+#&gt; 8946.92   2766.066 construction.year  8946
+#&gt; 8946.93   2760.714 construction.year  8946
+#&gt; 8946.94   2744.011 construction.year  8946
+#&gt; 8946.95   2770.095 construction.year  8946
+#&gt; 8946.96   2770.095 construction.year  8946
+#&gt; 8946.97   2792.435 construction.year  8946
+#&gt; 8946.98   2792.855 construction.year  8946
+#&gt; 8946.99   2790.318 construction.year  8946
+#&gt; 8946.100  2790.840 construction.year  8946
+#&gt; 4458      4220.874 construction.year  4458
+#&gt; 4458.1    4243.823 construction.year  4458
+#&gt; 4458.2    4269.480 construction.year  4458
+#&gt; 4458.3    4260.856 construction.year  4458
+#&gt; 4458.4    4271.707 construction.year  4458
+#&gt; 4458.5    4240.108 construction.year  4458
+#&gt; 4458.6    4245.880 construction.year  4458
+#&gt; 4458.7    4222.164 construction.year  4458
+#&gt; 4458.8    4222.164 construction.year  4458
+#&gt; 4458.9    4221.215 construction.year  4458
+#&gt;  [ reached getOption("max.print") -- omitted 4029 rows ]</div><div class='input'>
 <span class='co'># neighbors for a selected observation</span>
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartments</span>[<span class='fl'>1</span>, <span class='fl'>2</span>:<span class='fl'>6</span>]
-<span class='no'>small_apartments</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='select_neighbours.html'>select_neighbours</a></span>(<span class='no'>apartmentsTest</span>, <span class='no'>new_apartment</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+<span class='no'>small_apartments</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='select_neighbours.html'>select_neighbours</a></span>(<span class='no'>apartments_test</span>, <span class='no'>new_apartment</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)
 <span class='no'>small_apartments</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
 #&gt; 2285     5875              1970      27     3        1 Srodmiescie
 #&gt; 1073     5886              1960      36     2        1 Srodmiescie
@@ -193,20 +615,231 @@ you should overload it.</p>
 #&gt; 2655     5596              1950      25     6        1 Srodmiescie</div><div class='input'><span class='no'>small_profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_variable_profile</span>(<span class='no'>small_apartments</span>, <span class='no'>variable_splits</span>,
                                <span class='no'>apartments_rf_model</span>)
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;   construction.year surface floor no.rooms    district
-#&gt; 1              1953      25     3        1 Srodmiescie</div><div class='input'><span class='no'>small_profiles</span></div><div class='output co'>#&gt;        m2.price construction.year surface floor no.rooms    district   _yhat_
-#&gt; 2285       5875              1920      27     3        1 Srodmiescie 5438.443
-#&gt; 2285.1     5875              1921      27     3        1 Srodmiescie 5478.624
-#&gt; 2285.2     5875              1922      27     3        1 Srodmiescie 5477.707
-#&gt; 2285.3     5875              1923      27     3        1 Srodmiescie 5494.789
-#&gt; 2285.4     5875              1924      27     3        1 Srodmiescie 5501.781
-#&gt; 2285.5     5875              1925      27     3        1 Srodmiescie 5468.007
-#&gt;                  _vname_ _ids_
-#&gt; 2285   construction.year  2285
-#&gt; 2285.1 construction.year  2285
-#&gt; 2285.2 construction.year  2285
-#&gt; 2285.3 construction.year  2285
-#&gt; 2285.4 construction.year  2285
-#&gt; 2285.5 construction.year  2285</div></pre>
+#&gt; 1              1953      25     3        1 Srodmiescie</div><div class='input'><span class='no'>small_profiles</span></div><div class='output co'>#&gt;           m2.price construction.year surface floor no.rooms    district
+#&gt; 2285          5875           1920.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.1        5875           1921.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.2        5875           1922.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.3        5875           1923.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.4        5875           1924.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.5        5875           1925.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.6        5875           1926.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.7        5875           1927.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.8        5875           1927.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.9        5875           1928.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.10       5875           1929.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.11       5875           1929.89   27.00  3.00        1 Srodmiescie
+#&gt; 2285.12       5875           1931.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.13       5875           1932.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.14       5875           1933.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.15       5875           1934.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.16       5875           1934.84   27.00  3.00        1 Srodmiescie
+#&gt; 2285.17       5875           1935.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.18       5875           1936.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.19       5875           1937.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.20       5875           1938.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.21       5875           1939.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.22       5875           1940.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.23       5875           1941.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.24       5875           1941.76   27.00  3.00        1 Srodmiescie
+#&gt; 2285.25       5875           1943.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.26       5875           1944.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.27       5875           1945.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.28       5875           1946.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.29       5875           1946.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.30       5875           1947.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.31       5875           1948.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.32       5875           1949.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.33       5875           1949.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.34       5875           1950.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.35       5875           1951.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.36       5875           1952.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.37       5875           1953.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.38       5875           1954.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.39       5875           1956.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.40       5875           1956.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.41       5875           1957.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.42       5875           1957.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.43       5875           1958.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.44       5875           1959.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.45       5875           1959.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.46       5875           1960.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.47       5875           1961.53   27.00  3.00        1 Srodmiescie
+#&gt; 2285.48       5875           1962.52   27.00  3.00        1 Srodmiescie
+#&gt; 2285.49       5875           1963.51   27.00  3.00        1 Srodmiescie
+#&gt; 2285.50       5875           1965.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.51       5875           1965.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.52       5875           1967.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.53       5875           1967.47   27.00  3.00        1 Srodmiescie
+#&gt; 2285.54       5875           1968.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.55       5875           1969.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.56       5875           1970.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.57       5875           1971.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.58       5875           1971.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.59       5875           1972.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.60       5875           1973.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.61       5875           1974.39   27.00  3.00        1 Srodmiescie
+#&gt; 2285.62       5875           1975.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.63       5875           1977.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.64       5875           1977.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.65       5875           1978.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.66       5875           1980.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.67       5875           1981.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.68       5875           1982.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.69       5875           1983.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.70       5875           1984.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.71       5875           1985.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.72       5875           1985.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.73       5875           1986.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.74       5875           1987.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.75       5875           1988.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.76       5875           1989.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.77       5875           1990.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.78       5875           1990.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.79       5875           1991.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.80       5875           1992.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.81       5875           1993.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.82       5875           1993.18   27.00  3.00        1 Srodmiescie
+#&gt; 2285.83       5875           1994.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.84       5875           1995.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.85       5875           1996.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.86       5875           1997.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.87       5875           1997.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.88       5875           1998.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.89       5875           1999.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.90       5875           2000.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.91       5875           2001.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.92       5875           2002.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.93       5875           2003.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.94       5875           2004.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.95       5875           2005.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.96       5875           2005.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.97       5875           2007.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.98       5875           2008.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.99       5875           2009.00   27.00  3.00        1 Srodmiescie
+#&gt; 2285.100      5875           2010.00   27.00  3.00        1 Srodmiescie
+#&gt; 1073          5886           1920.00   36.00  2.00        1 Srodmiescie
+#&gt; 1073.1        5886           1921.00   36.00  2.00        1 Srodmiescie
+#&gt; 1073.2        5886           1922.00   36.00  2.00        1 Srodmiescie
+#&gt; 1073.3        5886           1923.00   36.00  2.00        1 Srodmiescie
+#&gt; 1073.4        5886           1924.00   36.00  2.00        1 Srodmiescie
+#&gt; 1073.5        5886           1925.00   36.00  2.00        1 Srodmiescie
+#&gt; 1073.6        5886           1926.00   36.00  2.00        1 Srodmiescie
+#&gt; 1073.7        5886           1927.00   36.00  2.00        1 Srodmiescie
+#&gt; 1073.8        5886           1927.00   36.00  2.00        1 Srodmiescie
+#&gt; 1073.9        5886           1928.00   36.00  2.00        1 Srodmiescie
+#&gt;             _yhat_           _vname_ _ids_
+#&gt; 2285      5438.443 construction.year  2285
+#&gt; 2285.1    5478.624 construction.year  2285
+#&gt; 2285.2    5477.707 construction.year  2285
+#&gt; 2285.3    5494.789 construction.year  2285
+#&gt; 2285.4    5501.781 construction.year  2285
+#&gt; 2285.5    5468.007 construction.year  2285
+#&gt; 2285.6    5465.337 construction.year  2285
+#&gt; 2285.7    5433.560 construction.year  2285
+#&gt; 2285.8    5433.560 construction.year  2285
+#&gt; 2285.9    5425.320 construction.year  2285
+#&gt; 2285.10   5445.891 construction.year  2285
+#&gt; 2285.11   5438.457 construction.year  2285
+#&gt; 2285.12   5440.406 construction.year  2285
+#&gt; 2285.13   5448.960 construction.year  2285
+#&gt; 2285.14   5461.389 construction.year  2285
+#&gt; 2285.15   5436.837 construction.year  2285
+#&gt; 2285.16   5404.217 construction.year  2285
+#&gt; 2285.17   5404.217 construction.year  2285
+#&gt; 2285.18   5363.778 construction.year  2285
+#&gt; 2285.19   5403.416 construction.year  2285
+#&gt; 2285.20   5387.823 construction.year  2285
+#&gt; 2285.21   5373.990 construction.year  2285
+#&gt; 2285.22   5349.621 construction.year  2285
+#&gt; 2285.23   5348.618 construction.year  2285
+#&gt; 2285.24   5366.241 construction.year  2285
+#&gt; 2285.25   5373.509 construction.year  2285
+#&gt; 2285.26   5374.568 construction.year  2285
+#&gt; 2285.27   5373.597 construction.year  2285
+#&gt; 2285.28   5372.107 construction.year  2285
+#&gt; 2285.29   5372.107 construction.year  2285
+#&gt; 2285.30   5356.377 construction.year  2285
+#&gt; 2285.31   5330.178 construction.year  2285
+#&gt; 2285.32   5336.091 construction.year  2285
+#&gt; 2285.33   5336.091 construction.year  2285
+#&gt; 2285.34   5332.569 construction.year  2285
+#&gt; 2285.35   5338.205 construction.year  2285
+#&gt; 2285.36   5352.517 construction.year  2285
+#&gt; 2285.37   5359.004 construction.year  2285
+#&gt; 2285.38   5347.291 construction.year  2285
+#&gt; 2285.39   5355.566 construction.year  2285
+#&gt; 2285.40   5355.566 construction.year  2285
+#&gt; 2285.41   5357.378 construction.year  2285
+#&gt; 2285.42   5357.378 construction.year  2285
+#&gt; 2285.43   5356.493 construction.year  2285
+#&gt; 2285.44   5366.250 construction.year  2285
+#&gt; 2285.45   5366.250 construction.year  2285
+#&gt; 2285.46   5364.315 construction.year  2285
+#&gt; 2285.47   5369.621 construction.year  2285
+#&gt; 2285.48   5357.827 construction.year  2285
+#&gt; 2285.49   5358.855 construction.year  2285
+#&gt; 2285.50   5359.039 construction.year  2285
+#&gt; 2285.51   5359.039 construction.year  2285
+#&gt; 2285.52   5333.112 construction.year  2285
+#&gt; 2285.53   5332.424 construction.year  2285
+#&gt; 2285.54   5332.356 construction.year  2285
+#&gt; 2285.55   5332.342 construction.year  2285
+#&gt; 2285.56   5334.859 construction.year  2285
+#&gt; 2285.57   5340.739 construction.year  2285
+#&gt; 2285.58   5340.739 construction.year  2285
+#&gt; 2285.59   5318.358 construction.year  2285
+#&gt; 2285.60   5305.124 construction.year  2285
+#&gt; 2285.61   5294.639 construction.year  2285
+#&gt; 2285.62   5291.872 construction.year  2285
+#&gt; 2285.63   5288.428 construction.year  2285
+#&gt; 2285.64   5288.428 construction.year  2285
+#&gt; 2285.65   5281.820 construction.year  2285
+#&gt; 2285.66   5281.746 construction.year  2285
+#&gt; 2285.67   5280.012 construction.year  2285
+#&gt; 2285.68   5281.034 construction.year  2285
+#&gt; 2285.69   5281.772 construction.year  2285
+#&gt; 2285.70   5280.657 construction.year  2285
+#&gt; 2285.71   5270.261 construction.year  2285
+#&gt; 2285.72   5270.261 construction.year  2285
+#&gt; 2285.73   5265.607 construction.year  2285
+#&gt; 2285.74   5254.770 construction.year  2285
+#&gt; 2285.75   5256.543 construction.year  2285
+#&gt; 2285.76   5270.716 construction.year  2285
+#&gt; 2285.77   5270.145 construction.year  2285
+#&gt; 2285.78   5270.145 construction.year  2285
+#&gt; 2285.79   5267.953 construction.year  2285
+#&gt; 2285.80   5256.818 construction.year  2285
+#&gt; 2285.81   5271.034 construction.year  2285
+#&gt; 2285.82   5279.476 construction.year  2285
+#&gt; 2285.83   5304.553 construction.year  2285
+#&gt; 2285.84   5302.645 construction.year  2285
+#&gt; 2285.85   5309.422 construction.year  2285
+#&gt; 2285.86   5295.701 construction.year  2285
+#&gt; 2285.87   5295.701 construction.year  2285
+#&gt; 2285.88   5298.538 construction.year  2285
+#&gt; 2285.89   5296.419 construction.year  2285
+#&gt; 2285.90   5298.509 construction.year  2285
+#&gt; 2285.91   5311.769 construction.year  2285
+#&gt; 2285.92   5302.862 construction.year  2285
+#&gt; 2285.93   5297.707 construction.year  2285
+#&gt; 2285.94   5305.363 construction.year  2285
+#&gt; 2285.95   5289.706 construction.year  2285
+#&gt; 2285.96   5289.706 construction.year  2285
+#&gt; 2285.97   5279.423 construction.year  2285
+#&gt; 2285.98   5278.751 construction.year  2285
+#&gt; 2285.99   5267.900 construction.year  2285
+#&gt; 2285.100  5261.709 construction.year  2285
+#&gt; 1073      5606.226 construction.year  1073
+#&gt; 1073.1    5647.030 construction.year  1073
+#&gt; 1073.2    5641.355 construction.year  1073
+#&gt; 1073.3    5666.310 construction.year  1073
+#&gt; 1073.4    5681.604 construction.year  1073
+#&gt; 1073.5    5620.077 construction.year  1073
+#&gt; 1073.6    5593.802 construction.year  1073
+#&gt; 1073.7    5553.468 construction.year  1073
+#&gt; 1073.8    5553.468 construction.year  1073
+#&gt; 1073.9    5539.046 construction.year  1073
+#&gt;  [ reached getOption("max.print") -- omitted 4029 rows ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

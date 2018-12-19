@@ -92,9 +92,10 @@ Various parameters help to decide what should be plotted, profiles, aggregated p
   <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>size_points</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>alpha_points</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>color_points</span> <span class='kw'>=</span> <span class='no'>color</span>, <span class='kw'>size_rugs</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>alpha_rugs</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>color_rugs</span> <span class='kw'>=</span> <span class='no'>color</span>, <span class='kw'>size_residuals</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha_residuals</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>color_residuals</span> <span class='kw'>=</span> <span class='no'>color</span>, <span class='kw'>only_numerical</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>aggregate_profiles</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>facet_ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>selected_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>color_residuals</span> <span class='kw'>=</span> <span class='no'>color</span>, <span class='kw'>only_numerical</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>aggregate_profiles</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>facet_ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>selected_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -141,7 +142,7 @@ Various parameters help to decide what should be plotted, profiles, aggregated p
     </tr>
     <tr>
       <th>color_rugs</th>
-      <td><p>a character. Either name of a color or name of a variable that should be used for coloring</p></td>
+      <td><p>a character. Either name of a color or name of a theme_mi2variable that should be used for coloring</p></td>
     </tr>
     <tr>
       <th>size_residuals</th>
@@ -195,27 +196,27 @@ Various parameters help to decide what should be plotted, profiles, aggregated p
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX2"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
 <span class='fu'>set.seed</span>(<span class='fl'>59</span>)
 
 <span class='no'>apartments_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
                                 <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
-<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_rf</span>,
-                        <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
+<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX2/topics/explain'>explain</a></span>(<span class='no'>apartments_rf</span>,
+                        <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments_test</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_test</span>$<span class='no'>m2.price</span>)
 
 <span class='no'>apartments_lm</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
                                 <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
-<span class='no'>explainer_lm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_lm</span>,
-                        <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
+<span class='no'>explainer_lm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX2/topics/explain'>explain</a></span>(<span class='no'>apartments_lm</span>,
+                        <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments_test</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_test</span>$<span class='no'>m2.price</span>)
 
 <span class='fu'>library</span>(<span class='st'>"e1071"</span>)
 <span class='no'>apartments_svm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/e1071/topics/svm'>svm</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
                                 <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
-<span class='no'>explainer_svm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_svm</span>,
-                        <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
+<span class='no'>explainer_svm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX2/topics/explain'>explain</a></span>(<span class='no'>apartments_svm</span>,
+                        <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments_test</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_test</span>$<span class='no'>m2.price</span>)
 
 <span class='co'># individual explanations</span>
-<span class='no'>my_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
+<span class='no'>my_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartments_test</span>[<span class='fl'>1</span>, ]
 
 <span class='co'># for random forest</span>
 <span class='no'>lp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_profile.html'>individual_variable_profile</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>my_apartment</span>)
@@ -273,7 +274,7 @@ Various parameters help to decide what should be plotted, profiles, aggregated p
 <span class='co'># multiclass</span>
 
 <span class='no'>HR_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>status</span> ~ <span class='no'>.</span> , <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HR</span>)
-<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>HR_rf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HRTest</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>HRTest</span>)
+<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX2/topics/explain'>explain</a></span>(<span class='no'>HR_rf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HRTest</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>HRTest</span>)
 
 <span class='no'>my_HR</span> <span class='kw'>&lt;-</span> <span class='no'>HRTest</span>[<span class='fl'>1</span>, ]
 

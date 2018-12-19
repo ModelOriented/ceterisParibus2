@@ -1,4 +1,4 @@
-context("Check plot_ceteris_paribus() function")
+context("Check plot_ceteris_paribus() function for LCE")
 
 library("DALEX2")
 library("randomForest")
@@ -12,21 +12,21 @@ explainer_rf <- explain(apartments_rf,
                         data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 
 apartments_lm <- lm(m2.price ~ construction.year + surface + floor +
-                                no.rooms + district, data = apartments)
+                      no.rooms + district, data = apartments)
 explainer_lm <- explain(apartments_lm,
                         data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 
 apartments_svm <- svm(m2.price ~ construction.year + surface + floor +
-                                no.rooms + district, data = apartments)
+                        no.rooms + district, data = apartments)
 explainer_svm <- explain(apartments_svm,
-                        data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+                         data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 
 # individual explanations
 my_apartment <- apartmentsTest[1, ]
 
-lp_rf <- individual_variable_profile(explainer_rf, my_apartment)
-lp_lm <- individual_variable_profile(explainer_lm, my_apartment)
-lp_svm <- individual_variable_profile(explainer_svm, my_apartment)
+lp_rf <- individual_conditional_expectations(explainer_rf, my_apartment)
+lp_lm <- individual_conditional_expectations(explainer_lm, my_apartment)
+lp_svm <- individual_conditional_expectations(explainer_svm, my_apartment)
 
 test_that("Output format - plot_ceteris_paribus",{
   expect_is(plot(lp_rf), "ggplot")

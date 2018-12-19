@@ -91,13 +91,15 @@ For this reason it is also called 'Local Profile Plot'.</p>
     <pre class="usage"><span class='fu'>individual_variable_profile</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for explainer</span>
-<span class='fu'>individual_variable_profile</span>(<span class='no'>x</span>, <span class='no'>new_observation</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>variable_splits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>, <span class='no'>...</span>)
+<span class='fu'>individual_variable_profile</span>(<span class='no'>x</span>, <span class='no'>new_observation</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>variable_splits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
 <span class='fu'>individual_variable_profile</span>(<span class='no'>x</span>, <span class='no'>data</span>,
-  <span class='kw'>predict_function</span> <span class='kw'>=</span> <span class='no'>predict</span>, <span class='no'>new_observation</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>variable_splits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'>class</span>(<span class='no'>x</span>)[<span class='fl'>1</span>], <span class='no'>...</span>)</pre>
+  <span class='kw'>predict_function</span> <span class='kw'>=</span> <span class='no'>predict</span>, <span class='no'>new_observation</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>variable_splits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>,
+  <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'>class</span>(<span class='no'>x</span>)[<span class='fl'>1</span>], <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -159,9 +161,9 @@ It's a data frame with calculated average responses.</p>
                                 <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
 
 <span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX2/topics/explain'>explain</a></span>(<span class='no'>apartments_rf</span>,
-                        <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
+                        <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments_test</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_test</span>$<span class='no'>m2.price</span>)
 
-<span class='no'>my_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
+<span class='no'>my_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartments_test</span>[<span class='fl'>1</span>, ]
 
 <span class='no'>lp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>individual_variable_profile</span>(<span class='no'>explainer_rf</span>, <span class='no'>my_apartment</span>)
 <span class='no'>lp_rf</span></div><div class='output co'>#&gt; Top profiles    : 
