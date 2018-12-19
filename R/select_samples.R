@@ -13,8 +13,8 @@
 #'
 #' @return a data frame with selected rows
 #' @examples
-#' library("DALEX")
-#' small_apartments <- select_sample(apartmentsTest)
+#' library("DALEX2")
+#' small_apartments <- select_sample(apartments_test)
 #' head(small_apartments)
 #' @export
 select_sample <- function(data, n = 100, seed = 1313) {

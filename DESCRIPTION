@@ -9,14 +9,13 @@ Description: Ceteris Paribus Profiles (What-If Plots) are designed to present mo
     for any predictive Machine Learning model and allow for model comparisons.
     Ceteris Paribus Profiles supplement the Break Down Plots from 'breakDown2' package.
 Depends: R (>= 3.3),
-    ggplot2, 
-    gower
+    ggplot2
 Suggests: randomForest,
     e1071,
     testthat,
-    rpart
-Imports: DALEX,
-    DALEX2,
+    rpart,
+    gower
+Imports: DALEX2,
     knitr
 License: GPL-2
 Encoding: UTF-8
@@ -24,4 +23,4 @@ LazyData: true
 VignetteBuilder: knitr
 URL: https://ModelOriented.github.io/ceterisParibus2/
 BugReports: https://github.com/ModelOriented/ceterisParibus2/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

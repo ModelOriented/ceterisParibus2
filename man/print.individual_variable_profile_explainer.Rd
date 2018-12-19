@@ -15,7 +15,7 @@
 Prints Individual Variable Explainer Summary
 }
 \examples{
-library("DALEX")
+library("DALEX2")
  \dontrun{
 library("randomForest")
 set.seed(59)
@@ -24,9 +24,9 @@ apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + flo
       no.rooms + district, data = apartments)
 
 explainer_rf <- explain(apartments_rf_model,
-      data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+      data = apartments_test[,2:6], y = apartments_test$m2.price)
 
-apartments_small <- select_sample(apartmentsTest, 10)
+apartments_small <- select_sample(apartments_test, 10)
 
 cp_rf <- individual_variable_profile(explainer_rf, apartments_small)
 cp_rf

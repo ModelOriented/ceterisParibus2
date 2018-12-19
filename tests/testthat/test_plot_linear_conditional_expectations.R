@@ -1,9 +1,10 @@
 context("Check plot_ceteris_paribus() function for LCE")
 
-library("DALEX")
+library("DALEX2")
 library("randomForest")
 library("e1071")
 set.seed(59)
+apartmentsTest <- apartments_test
 
 apartments_rf <- randomForest(m2.price ~ construction.year + surface + floor +
                                 no.rooms + district, data = apartments)
@@ -23,9 +24,9 @@ explainer_svm <- explain(apartments_svm,
 # individual explanations
 my_apartment <- apartmentsTest[1, ]
 
-lp_rf <- local_conditional_expectations(explainer_rf, my_apartment)
-lp_lm <- local_conditional_expectations(explainer_lm, my_apartment)
-lp_svm <- local_conditional_expectations(explainer_svm, my_apartment)
+lp_rf <- individual_conditional_expectations(explainer_rf, my_apartment)
+lp_lm <- individual_conditional_expectations(explainer_lm, my_apartment)
+lp_svm <- individual_conditional_expectations(explainer_svm, my_apartment)
 
 test_that("Output format - plot_ceteris_paribus",{
   expect_is(plot(lp_rf), "ggplot")

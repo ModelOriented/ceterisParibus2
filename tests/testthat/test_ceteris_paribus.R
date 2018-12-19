@@ -3,6 +3,8 @@ context("Check ceteris_paribus() function")
 library("DALEX2")
 library("randomForest")
 set.seed(59)
+apartmentsTest <- apartments_test
+HRTest <- HR_test
 
 # apartments_rf <- randomForest(m2.price ~ construction.year + surface + floor +
 #                                 no.rooms + district, data = apartments)

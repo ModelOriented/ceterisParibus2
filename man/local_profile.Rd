@@ -8,12 +8,14 @@
 \usage{
 individual_variable_profile(x, ...)
 
-\method{individual_variable_profile}{explainer}(x, new_observation, y = NULL,
-  variables = NULL, variable_splits = NULL, grid_points = 101, ...)
+\method{individual_variable_profile}{explainer}(x, new_observation,
+  y = NULL, variables = NULL, variable_splits = NULL,
+  grid_points = 101, ...)
 
 \method{individual_variable_profile}{default}(x, data,
-  predict_function = predict, new_observation, y = NULL, variables = NULL,
-  variable_splits = NULL, grid_points = 101, label = class(x)[1], ...)
+  predict_function = predict, new_observation, y = NULL,
+  variables = NULL, variable_splits = NULL, grid_points = 101,
+  label = class(x)[1], ...)
 }
 \arguments{
 \item{x}{a model to be explained, or an explainer created with function `DALEX::explain()`.}
@@ -56,9 +58,9 @@ apartments_rf <- randomForest(m2.price ~ construction.year + surface + floor +
                                 no.rooms + district, data = apartments)
 
 explainer_rf <- explain(apartments_rf,
-                        data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+                        data = apartments_test[,2:6], y = apartments_test$m2.price)
 
-my_apartment <- apartmentsTest[1, ]
+my_apartment <- apartments_test[1, ]
 
 lp_rf <- individual_variable_profile(explainer_rf, my_apartment)
 lp_rf

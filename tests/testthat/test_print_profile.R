@@ -1,8 +1,9 @@
 context("Check print_profile() function")
 
-library("DALEX")
+library("DALEX2")
 library("randomForest")
 set.seed(59)
+apartmentsTest <- apartments_test
 
 apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
       no.rooms + district, data = apartments)

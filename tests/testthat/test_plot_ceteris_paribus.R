@@ -1,9 +1,10 @@
 context("Check plot_ceteris_paribus() function")
 
-library("DALEX")
+library("DALEX2")
 library("randomForest")
 library("e1071")
 set.seed(59)
+apartmentsTest <- apartments_test
 
 apartments_rf <- randomForest(m2.price ~ construction.year + surface + floor +
                                 no.rooms + district, data = apartments)

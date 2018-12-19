@@ -32,7 +32,7 @@ If you want to work on non standard data sources (like H2O ddf, external databas
 you should overload it.
 }
 \examples{
-library("DALEX")
+library("DALEX2")
  \dontrun{
 library("randomForest")
 set.seed(59)
