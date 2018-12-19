@@ -14,7 +14,9 @@ Depends: R (>= 3.3),
 Suggests: randomForest,
     e1071,
     testthat,
-    rpart
+    rpart,
+    nnet,
+    caret
 Imports: DALEX,
     DALEX2,
     knitr
