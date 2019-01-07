@@ -1,6 +1,7 @@
 [![Build Status](https://api.travis-ci.org/ModelOriented/ceterisParibus2.png)](https://travis-ci.org/ModelOriented/ceterisParibus2)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/ModelOriented/ceterisParibus2/master.svg)](https://codecov.io/github/ModelOriented/ceterisParibus2?branch=master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ModelOriented/ceterisParibus2/master?filepath=jupyter-notebooks%2Ftest.ipynb)
 
 # Ceteris Pabibus: Model Agnostic Explorartion for Individual Predictions
 
