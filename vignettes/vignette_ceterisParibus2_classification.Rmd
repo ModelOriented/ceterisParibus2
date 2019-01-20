@@ -1,0 +1,176 @@
+---
+title: "ceterisParibus2 plots for classification models"
+author: "Dariusz Komosinski"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_document
+vignette: >
+  %\VignetteIndexEntry{ceterisParibus2 plots for classiifcation models}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE,
+  cache = TRUE
+)
+```
+
+Here we will use the HR data to present the ceterisParibus2 package for classification models.
+
+```{r}
+# devtools::install_github("ModelOriented/DALEX2")
+library(DALEX2)
+library(ggplot2)
+library(ceterisParibus2)
+  
+head(HR)
+new_observation <- HR_test[1,]
+new_observation
+```
+
+Select neighbourhood sample, random sample, specific variables.
+
+```{r}
+similar_employees <- select_neighbours(HR_test, new_observation, n = 10)
+similar_employees
+
+random_employees <- select_sample(HR_test, n = 10)
+random_employees
+
+variable_splits <- calculate_variable_split(HR, variables = c("hours", "gender"))
+```
+
+
+## GLM
+
+First, we fit a model.
+
+```{r}
+library(nnet)
+m_glm <- multinom(status ~ . , data = HR)
+```
+
+To calculete individual variable profiles (ceteris paribus profiles), i.e. series of predictions from a model calculated for observations with altered single coordinate, we use the `ceterisParibus2` package.
+
+We create an object of the `ceteris_paribus_explainer` class.
+
+```{r}
+ivp_glm <- individual_variable_profile(m_glm,
+                            data = HR_test,
+                            new_observation =  new_observation)
+```
+
+Now we can plot individual profiles
+```{r}
+plot(ivp_glm)
+```
+
+Ceteris paribus plots for neighbourhood sample, random sample, selected variables.
+
+```{r}
+ivp_glm_neighbours <- individual_variable_profile(m_glm,
+                            data = similar_employees,
+                            new_observation =  new_observation)
+plot(ivp_glm_neighbours)
+
+ivp_glm_random <- individual_variable_profile(m_glm,
+                            data = random_employees,
+                            new_observation =  new_observation)
+plot(ivp_glm_random)
+```
+
+Data frame with profiles.
+
+```{r}
+profiles <- calculate_variable_profile(data = new_observation,
+                                       variable_splits = variable_splits,
+                                       model = m_glm)
+head(profiles)
+```
+
+For another type of models we proceed analogously.
+
+## randomForest
+
+```{r}
+library(randomForest)
+
+m_rf <- randomForest(status ~ . , data = HR)
+
+ivp_rf <- individual_variable_profile(m_rf,
+                            data = HR_test,
+                            new_observation =  new_observation)
+
+plot(ivp_rf)
+```
+
+## SVM
+
+```{r}
+library(e1071)
+
+m_svm <- svm(status ~ . , data = HR)
+
+ivp_svm <- individual_variable_profile(m_svm,
+                            data = HR_test,
+                            new_observation =  new_observation)
+
+plot(ivp_svm)
+```
+
+## knn
+
+```{r}
+library(caret)
+
+m_knn <- knn3(status ~ . , data = HR, k = 5)
+
+p_fun <- function(model, new_observation){
+  predict(model, newdata = new_observation, type = "class")
+}
+
+ivp_knn <- individual_variable_profile(m_knn,
+                            data = HR_test,
+                            new_observation =  new_observation,
+                            predict_function = p_fun)
+
+plot(ivp_knn)
+```
+
+## nnet
+
+```{r}
+library(nnet)
+
+m_nnet <- nnet(status ~ . , data = HR, size = 10)
+
+p_fun <- function(model, new_observation){
+  predict(model, newdata = new_observation, type = "class")
+}
+
+ivp_nnet <- individual_variable_profile(m_nnet,
+                            data = HR_test,
+                            new_observation =  new_observation,
+                            predict_function = p_fun)
+
+plot(ivp_nnet)
+```
+
+## Several models at once
+
+To produce plot with many models in one graph, use argument `color = _label_`.
+
+```{r}
+plot(ivp_glm, ivp_rf, ivp_svm, ivp_knn, color = "_label_")
+```
+
+
+<!-- ## lightGBM -->
+
+<!-- ```{r} -->
+
+
+<!-- ``` -->
