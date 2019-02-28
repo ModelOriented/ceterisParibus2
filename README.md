@@ -3,7 +3,7 @@
 Status](https://img.shields.io/codecov/c/github/ModelOriented/ceterisParibus2/master.svg)](https://codecov.io/github/ModelOriented/ceterisParibus2?branch=master)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ModelOriented/ceterisParibus2/master?filepath=jupyter-notebooks)
 
-# Ceteris Pabibus: Model Agnostic Explorartion for Individual Predictions
+# Ceteris Paribus: Model Agnostic Explorartion for Individual Predictions
 
 **ceterisParibus2** is a very experimental version of the [ceterisParibus](https://github.com/pbiecek/ceterisParibus) package. 
 Expect rapid changes.
