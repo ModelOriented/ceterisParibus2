@@ -14,8 +14,10 @@ Suggests: randomForest,
     e1071,
     testthat,
     rpart,
-    gower
-Imports: DALEX2,
+    nnet,
+    caret
+Imports: DALEX,
+    DALEX2,
     knitr
 License: GPL-2
 Encoding: UTF-8
