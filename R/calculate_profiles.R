@@ -25,14 +25,14 @@
 #' new_apartment <- apartments_test[1:10, ]
 #' profiles <- calculate_variable_profile(new_apartment, variable_splits,
 #'                                apartments_rf_model)
-#' profiles
+#' head(profiles)
 #'
 #' # only subset of observations
 #' small_apartments <- select_sample(apartments_test, n = 10)
 #' small_apartments
 #' small_profiles <- calculate_variable_profile(small_apartments, variable_splits,
 #'                                apartments_rf_model)
-#' small_profiles
+#' head(small_profiles)
 #'
 #' # neighbors for a selected observation
 #' new_apartment <- apartments[1, 2:6]
@@ -40,8 +40,8 @@
 #' small_apartments
 #' small_profiles <- calculate_variable_profile(small_apartments, variable_splits,
 #'                                apartments_rf_model)
-#' new_apartment
-#' small_profiles
+#' head(new_apartment)
+#' head(small_profiles)
 #' }
 #' @export
 calculate_variable_profile <- function(data, variable_splits, model, predict_function = predict, ...) {

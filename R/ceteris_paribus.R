@@ -36,7 +36,7 @@
 #' my_apartment <- apartments_test[1, ]
 #'
 #' lp_rf <- individual_variable_profile(explainer_rf, my_apartment)
-#' lp_rf
+#' head(lp_rf)
 #'
 #' plot(lp_rf)
 #'
@@ -49,7 +49,7 @@
 #' my_HR <- HRTest[1, ]
 #'
 #' lp_rf <- individual_variable_profile(explainer_rf,  my_HR)
-#' lp_rf
+#' head(lp_rf)
 #'
 #' plot(lp_rf, color = "_label_")
 #'
